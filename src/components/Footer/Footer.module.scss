@@ -1,0 +1,38 @@
+.footer {
+  color: #fff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9E2A2B;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+footer .copyright {
+  font-size: 14px;
+  text-align: center;
+}
+footer .copyright a {
+}
+footer .copyright a:hover {
+}
+footer .copyright:before {
+  content: '©';
+}
+.footer__details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.footer__github {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+.footer__rs {
+  position: relative;
+  width: 100px;
+  height: 50px;
+}
