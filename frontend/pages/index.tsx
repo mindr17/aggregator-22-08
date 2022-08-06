@@ -112,6 +112,12 @@ function Home (props: any) {
         },
       );
 
+      // /iss/statistics/engines/stock/currentprices
+      const pricesUrl = 'https://iss.moex.com/iss/statistics/engines/stock/currentprices?iss.json=compact';
+      const pricesRes = await fetch(pricesUrl);
+      const prices = await pricesRes.json();
+      console.log('prices: ', prices);
+
       if (typeof response === 'undefined') throw new Error('got undefined from backend');
       
       const goods = await response.json();
