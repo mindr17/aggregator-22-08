@@ -5,23 +5,27 @@
 }
 
 .main {
+  // display: flex;
   background-color: #540B0E;
   min-height: 500px;
   padding: 19px;
 }
 
-.main__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
-  width: 100%;
-}
+// .main__container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 500px;
+//   width: 100%;
+// }
 
 .main__goods {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 1em;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
   align-items: center;
 }
 

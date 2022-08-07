@@ -12,7 +12,7 @@ const Main = (props: IMainProps) => {
 
   return (
     <main className={styles.main} id="main">
-      <Filters />
+      {/* <Filters /> */}
 
       <div className={styles.main__goods}>
         {

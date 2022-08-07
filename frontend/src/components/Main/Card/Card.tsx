@@ -13,12 +13,12 @@ const Card = (props: { onToggleCart: () => void; goodData: IGood }) => {
     <div className={styles.card} onClick={toggleCart}>
       <div className={styles.card__count}>{props.goodData.name}</div>
       <img className={styles.card__img} src={props.goodData.img} alt="картинка товара" />
-      <div className={styles.card__count}></div>
+      {/* <div className={styles.card__count}></div>
       <div className={styles.card__year}></div>
       <div className={styles.card__manufacturer}></div>
       <div className={styles.card__color}></div>
       <div className={styles.card__type}></div>
-      <div className={styles.card__status}></div>
+      <div className={styles.card__status}></div> */}
     </div>
   );
 }

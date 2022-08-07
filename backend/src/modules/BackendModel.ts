@@ -1,4 +1,4 @@
-import { IFilters, IGood } from "../../../frontend-ts/src/scripts/types";
+// import { IFilters, IGood } from "../../../frontend/src/scripts/types";
 import { IUrlParams } from "../backendTypes";
 import { goodsDb } from './goodsDb';
 import { filterBooleans } from './filters/commonFilters/filterBooleans'

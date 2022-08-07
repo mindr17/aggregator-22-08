@@ -4,7 +4,7 @@ import express from "express";
 import { BackendModel } from "../modules/BackendModel";
 // import cors from "cors";
 import bodyParser from "body-parser";
-import { IGood } from '../../../frontend-ts/src/scripts/types';
+// import { IGood } from '../../../frontend-ts/src/scripts/types';
 
 const port = '4333';
 const app = express();
