@@ -1,3 +1,3 @@
-import { startBackServer } from './servers/backHttpServer';
+import { startWsServer } from './servers/WSServer';
 
-startBackServer();
+startWsServer();
