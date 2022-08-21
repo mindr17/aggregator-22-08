@@ -21,22 +21,17 @@ export const startWsServer = (): void => {
       `New client connected!\nDuplex stream created with encoding: 'utf8', decodeStrings: false,\n`
     );
 
-    const wait = (ms: number) => {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    };
-
     const sendToFront = async () => {
-      await wait(1000);
-
       const date = new Date();
-
       const messageObj = {
+        type: 'news',
         msg: `Hello from backend! Time now is ${date}`,
       };
-
       duplex.write(JSON.stringify(messageObj));
 
-      sendToFront();
+      setTimeout(() => {
+        sendToFront();
+      }, 1000);
     };
 
     sendToFront();

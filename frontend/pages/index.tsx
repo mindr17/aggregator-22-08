@@ -8,17 +8,19 @@ function Home (props: any) {
   useEffect(() => {
     const chatSocket: socketInterface = new MySocket();
 
-    chatSocket.onMessage((event: { data: string; }) => {
-      const newStr = event.data;
-      const newObj = JSON.parse(newStr);
+    const handleNewsEvent = (event: any) => {
       setMessages(lastState => {
-        return [newObj.msg, ...lastState];
+        return [event.detail.msg, ...lastState];
       });
-    });
+    };
+
+    window.addEventListener('news', handleNewsEvent);
 
     return (
       () => {
         chatSocket.destroy();
+        
+        window.removeEventListener('news', handleNewsEvent);
       }
     );
   }, []);

@@ -13,6 +13,15 @@ export class MySocket implements socketInterface {
       console.log('Connection open!');
     };
 
+    this._socket.onmessage = ((event: { data: string; }) => {
+      const fromBackendStr = event.data;
+      const fromBackendObj = JSON.parse(fromBackendStr);
+      const msgFromBackendEvent = new CustomEvent(fromBackendObj.type, { detail: fromBackendObj });
+      
+      window.dispatchEvent(msgFromBackendEvent);
+      console.log(fromBackendStr);
+    });
+
     this._socket.onclose = (event): void => {
       if (event.wasClean) {
         console.log('Connection closed!');
@@ -25,10 +34,6 @@ export class MySocket implements socketInterface {
     this._socket.onerror = (error: any): void => {
       console.log(`error: ${error.message}`);
     };
-  }
-
-  public onMessage(callback: any): void {
-    this._socket.onmessage = callback;
   }
 
   public sendMessage(socketMsgJson: string): void {
