@@ -12,7 +12,7 @@ export const startWsServer = (): void => {
   });
 
   wss.on('connection', async (ws) => {
-    const duplex = createWebSocketStream(ws, { 
+    const duplex = createWebSocketStream(ws, {
       encoding: 'utf8',
       decodeStrings: false,
     });

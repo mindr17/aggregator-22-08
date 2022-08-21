@@ -1,20 +1,24 @@
 const configTemplate = {
   "baseConfig": {
-    url: 'wss://bananasite.ru/api/aggregator',
-    // url: 'ws://localhost:3030/api/aggregator', 
     port: 3030,
   },
   "devConfig": {
+    url: 'ws://localhost:3030/',
   },
   "prodConfig": {
+    url: 'wss://bananasite.ru/api/aggregator',
   },
 };
 
-const configType = (process.env.NODE_ENV !== 'development')
+const configType = (process.env.NODE_ENV === 'development')
   ? 'devConfig'
   : 'prodConfig';
+
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
 
 export const config = {
   ...configTemplate['baseConfig'],
   ...configTemplate[configType],
 };
+
+console.log('config: ', config);
