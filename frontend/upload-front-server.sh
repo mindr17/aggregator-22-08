@@ -2,7 +2,7 @@
 PROJECT_NAME="melody"
 HOST="melody"
 # FRONTEND_DIR="/var/www/html/public"
-FRONTEND_DIR="/root/backend"
+FRONTEND_DIR="/root/aggregator/frontend"
 
 echo "Uploading"
 npm run build

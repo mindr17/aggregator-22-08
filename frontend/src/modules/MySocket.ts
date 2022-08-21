@@ -19,7 +19,6 @@ export class MySocket implements socketInterface {
       const msgFromBackendEvent = new CustomEvent(fromBackendObj.type, { detail: fromBackendObj });
       
       window.dispatchEvent(msgFromBackendEvent);
-      console.log(fromBackendStr);
     });
 
     this._socket.onclose = (event): void => {

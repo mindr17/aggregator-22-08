@@ -1,1 +1,4 @@
-dist/
+.next/
+public/
+next.config.js
+package.json

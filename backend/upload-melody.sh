@@ -1,5 +1,5 @@
 HOST="melody"
-BACKEND_DIR="/root/backend"
+BACKEND_DIR="/root/aggregator/backend"
 
 echo "Building"
 npm run build

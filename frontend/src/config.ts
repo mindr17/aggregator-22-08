@@ -1,6 +1,7 @@
 const configTemplate = {
   "baseConfig": {
-    url: 'ws://localhost:3030/',
+    url: 'wss://bananasite.ru/api/aggregator',
+    // url: 'ws://localhost:3030/api/aggregator', 
     port: 3030,
   },
   "devConfig": {
