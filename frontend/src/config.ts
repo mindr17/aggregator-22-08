@@ -14,11 +14,10 @@ const configType = (process.env.NODE_ENV === 'development')
   ? 'devConfig'
   : 'prodConfig';
 
-console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
-
 export const config = {
   ...configTemplate['baseConfig'],
   ...configTemplate[configType],
 };
 
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
 console.log('config: ', config);
