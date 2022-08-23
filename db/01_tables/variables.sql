@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS variables (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  value VARCHAR NULL,
+  CONSTRAINT name_unique UNIQUE (name)
+)
