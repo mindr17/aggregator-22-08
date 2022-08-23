@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.footer {
+    background-color: $color-bg-primary;
+    color: $color-font-primary;
+    font-size: $size-text;
+
+    .container {
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 180rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .studentsList {
+            display: flex;
+            list-style-type: none;
+
+            & li {
+                padding: 0 1rem;
+
+                & a {
+                    color: $color-font-primary;
+                    transition: $transition;
+
+                    &:hover {
+                        color: $color-font-secondary;
+                    }
+                }
+            }
+        }
+    }
+}
