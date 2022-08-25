@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { WebSocketServer, createWebSocketStream } from 'ws';
+import { myEmitter } from '../modules/myEmitter';
 
 const BACK_PORT: string = process.env.BACK_PORT || '3030';
 
@@ -21,20 +22,18 @@ export const startWsServer = (): void => {
       `New client connected!\nDuplex stream created with encoding: 'utf8', decodeStrings: false,\n`
     );
 
-    const sendToFront = async () => {
+    myEmitter.on('news', (event) => {
+      console.log('event: ', event);
+
       const date = new Date();
       const messageObj = {
         type: 'news',
-        msg: `Hello from backend! Time now is ${date}`,
+        msg: event,
       };
+      console.log('messageObj: ', messageObj);
+
       duplex.write(JSON.stringify(messageObj));
-
-      setTimeout(() => {
-        sendToFront();
-      }, 1000);
-    };
-
-    sendToFront();
+    });
 
     for await (const chunk of duplex) {
       try {
