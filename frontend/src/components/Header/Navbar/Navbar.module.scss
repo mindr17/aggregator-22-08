@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30rem;
+
+    & a {
+        color: $color-font-primary;
+        transition: $transition;
+
+        &:hover {
+            color: $color-font-secondary;
+        }
+    }
+}
