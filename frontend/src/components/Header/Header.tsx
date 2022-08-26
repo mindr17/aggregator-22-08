@@ -7,7 +7,7 @@ const Header: React.FC = () => {
       <div className={styles.container}>
         <h1 className={styles.logo}>Logo</h1>
         <Navbar />
-        <button>Login</button>
+        <button className={styles.login}>Login</button>
         <div>
           <input type='checkbox' />
           <input type='select' />

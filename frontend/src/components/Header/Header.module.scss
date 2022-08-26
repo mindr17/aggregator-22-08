@@ -13,5 +13,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .login {
+            color: $color-font-primary;
+            background-color: $color-bg-primary;
+            border: 0.05rem solid $color-font-primary;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: $transition;
+
+            &:hover {
+                color: $color-font-secondary;
+                border-color: $color-font-secondary;
+                background-color: $color-bg-secondary;
+                cursor: pointer;
+            }
+        }
     }
 }
