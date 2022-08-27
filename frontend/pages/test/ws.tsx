@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
-import { socketInterface } from '../src/modules/interfaces';
-import { MySocket } from '../src/modules/MySocket';
+import { socketInterface } from '../../src/modules/interfaces';
+import { MySocket } from '../../src/modules/MySocket';
 
 function Home (props: any) {
   const [messagesState, setMessagesState] = useState([{uid: 'osifdnaof'}]);
