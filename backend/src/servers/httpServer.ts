@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import express from "express";
 import bodyParser from "body-parser";
-import cors from "cors";
 import { dbConnection } from '../modules/dbConnection';
 import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
 
@@ -9,14 +8,15 @@ export const startHttpServer = (): void => {
   const port = '3031';
   const app = express();
 
-  app.use(cors());
-
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
   try {
     app.post('/', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
+
+      const body = res.body;
+      console.log('body: ', body);
       
       const news = await dbConnection.getNews();
       

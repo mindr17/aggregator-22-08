@@ -17,19 +17,20 @@ function Home (props: any) {
             'Content-Type': 'text/plain',
           },
           // body: JSON.stringify(filters),
-          body: '',
+          body: JSON.stringify({filters: 'some filters'}),
         },
       );
 
       const news = await response.json();
       
+      news.forEach((item: any) => {
+        item.uid = Math.random();
+      });
+
       return news;
     };
 
     fetchData({}).then((news) => {
-      // setMessagesState((oldState: any) => {
-        //   return [...oldState, news];
-        // });
       setMessagesState(news);
     });
 
