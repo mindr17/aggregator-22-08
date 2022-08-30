@@ -31,8 +31,6 @@ export const startHttpServer = (): void => {
   });
 };
 
-
-
 // export const startHttpServer = (): void => {
 //   try {
 //     const server = createServer(async (
