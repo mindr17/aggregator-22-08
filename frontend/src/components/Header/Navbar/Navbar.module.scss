@@ -8,11 +8,28 @@
     padding-right: 20vw;
 
     & a {
+        position: relative;
         color: $color-font-primary;
         transition: $transition;
 
         &:hover {
             color: $color-font-secondary;
         }
+    }
+
+    .active {
+        color: $color-font-secondary;
+        // background: linear-gradient(0.13deg, rgba(9, 50, 163, 0.08) 0.12%, rgba(121, 128, 148, 0) 99.89%);
+
+        &::before {
+            display: block;
+            position: absolute;
+            top: -1.5rem;
+            height: 0.05rem;
+            width: 100%;
+            background-color: $color-font-secondary;
+            content: "";
+        }
+
     }
 }
