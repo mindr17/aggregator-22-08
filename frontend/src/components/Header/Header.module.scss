@@ -1,16 +1,33 @@
-@import '../../styles/variables';
+@import '../../styles/variables.scss';
 
 .header {
     background-color: $color-bg-primary;
     color: $color-font-primary;
     font-size: $size-text;
+    width: 100%;
 
     .container {
         margin: 0 auto;
         padding: 0 2rem;
-        width: 180rem;
+        max-width: 180rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .login {
+            color: $color-font-primary;
+            background-color: $color-bg-primary;
+            border: 0.05rem solid $color-font-primary;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: $transition;
+
+            &:hover {
+                color: $color-font-secondary;
+                border-color: $color-font-secondary;
+                background-color: $color-bg-secondary;
+                cursor: pointer;
+            }
+        }
     }
 }
