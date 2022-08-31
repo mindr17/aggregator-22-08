@@ -17,7 +17,7 @@ export const startHttpServer = (): void => {
 
       const body = res.body;
       console.log('body: ', body);
-      
+
       const news = await dbConnection.getNews();
       
       res.send(JSON.stringify(news));
@@ -25,7 +25,7 @@ export const startHttpServer = (): void => {
   } catch(err) {
     console.error(err);
   }
-    
+
   app.listen(port, () => {
     console.log(`Fetch api listening at http://localhost:${port}`);
   });
