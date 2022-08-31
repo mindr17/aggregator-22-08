@@ -93,7 +93,7 @@ router.post(
                 { expiresIn: '24h' }
             );
 
-            res.json({ token, userId: user.id });
+            res.status(200).json({ token, userId: user.id, message: 'Welcome!' });
 
         } catch (err) {
             console.log('err', err);
