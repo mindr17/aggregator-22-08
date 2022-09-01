@@ -1,0 +1,12 @@
+{
+  "timeout": 10000,
+  "rss": {
+    "gazprom": "https://gazprom.ru/rss",
+    "vedomosti": "https://www.vedomosti.ru/rss/rubric/finance/markets",
+    "news_ru": "https://news.ru/rss/category/post/economics/",
+    "mk_ru": "https://www.mk.ru/rss/economics/index.xml",
+    "oon": "https://news.un.org/feed/subscribe/ru/tags/fincrisis/feed/rss.xml",
+    "prime": "https://1prime.ru/export/rss2/state_regulation/index.xml",
+    "finam": "https://bonds.finam.ru/news/today/rss.asp"
+  }
+}

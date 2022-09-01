@@ -1,67 +1,65 @@
-const axios = require("axios").default;
 const Parser = require("rss-parser");
 const { Client } = require("pg");
+const rssScraper = require("./news/rssScraper");
+const fs = require("fs");
+const path = require("node:path");
+const config = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "../config.json"))
+);
+
+const setVariable = async (name: any, value: any): Promise<any> => {
+  var client = new Client({
+    user: "postgres",
+    database: "aggregator",
+    password: "postgres",
+    host: "localhost",
+  });
+
+  client.connect();
+
+  await client.query(`CALL set_variable('${name}', '${value}');`);
+  await client.end();
+};
+
+const getVariable = async (name: any): Promise<any> => {
+  var client = new Client({
+    user: "postgres",
+    database: "aggregator",
+    password: "postgres",
+    host: "localhost",
+  });
+
+  client.connect();
+
+  const res = await client.query(`SELECT * FROM get_variable('${name}');`);
+
+  await client.end();
+
+  return res.rows[0].get_variable;
+};
+
+(async () => await setVariable("isWorking", false))();
 
 setInterval(async () => {
-  console.info("Start scraping.");
+  console.info("Attempt to start scraping.");
 
-  const parser = new Parser();
-  const feed = await parser.parseURL("https://gazprom.ru/rss");
+  const isWorking: boolean = (await getVariable("isWorking")) === "true";
 
-  if (feed.items.length) {
-    const client = new Client({
-      user: "postgres",
-      database: "aggregator",
-      password: "postgres",
-      host: "localhost",
+  if (!isWorking) {
+    console.info("Start scraping");
+
+    await setVariable("isWorking", true);
+
+    // Get news from RSS
+    Object.entries(config.rss).forEach((x) => {
+      rssScraper(x[1], x[0]);
     });
 
-    let tempTableValues: string[] = [];
+    // Get news from other resources...
 
-    feed.items.forEach((item) => {
-      tempTableValues.push(
-        `(TIMESTAMP '${item.pubDate}', '${item.title}', '${item.link}', '${item.content}')`
-      );
-    });
-
-    const merge = `
-      INSERT INTO news
-      (date, title, url, text)
-      VALUES
-      ${tempTableValues.join(",")}
-      on conflict(date, url) do nothing;
-      commit;`;
-
-    console.info(`About to merge ${tempTableValues.length} rows.`);
-
-    client.connect();
-    client.query(merge, (err, res) => {
-      if (err) {
-        console.error(err.stack);
-      } else {
-        console.info(`Added ${res[0].rowCount} new rows.`);
-      }
-
-      client.end();
-
-      console.info("Finish scraping.");
-    });
+    await setVariable("isWorking", false);
+    await setVariable("lastSyncDate", new Date());
+  } else {
+    console.info("Previous scraping didn't finish.");
   }
-}, 5000);
-
-// // // Set variable
-// // client.connect();
-// // client.query(
-// //   "CALL set_variable('lastSyncDate', '2022-08-08 01:01:01');",
-// //   (err, res) => {
-// //     console.log(err ? err.stack : res.rows);
-// //     client.end();
-// //   }
-// // );
-
-// // // Get variable
-// // client.connect();
-// // client.query("SELECT * FROM get_variable('lastSyncDate');", (err, res) => {
-// //   console.log(err ? err.stack : res.rows);
-// //   client.end();
-// // });
+}, config.timeout);
