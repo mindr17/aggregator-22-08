@@ -3,6 +3,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import { dbConnection } from '../modules/dbConnection';
 import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
+import mongoose from 'mongoose';
+import cors from 'cors';
 
 export const startHttpServer = (): void => {
   const port = '3031';

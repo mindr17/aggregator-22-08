@@ -1,5 +1,6 @@
-// import { Client } from 'pg';
-const { Client } = require("pg");
+// const { Client } = require("pg");
+import pg from 'pg';
+const { Client } = pg;
 
 class DbConnection {
   private _client: any;
