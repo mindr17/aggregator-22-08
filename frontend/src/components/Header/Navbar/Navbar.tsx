@@ -14,11 +14,11 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={styles.nav}>
-      {navgation.map(({ id, title, path }) => (
+      {/* {navgation.map(({ id, title, path }) => (
         <Link key={id} href={path}>
           <a className={pathname === path ? styles.active : null}>{title}</a>
         </Link>
-      ))}
+      ))} */}
     </nav>
   )
 }

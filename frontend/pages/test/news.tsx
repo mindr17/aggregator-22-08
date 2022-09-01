@@ -7,39 +7,59 @@ function Home (props: any) {
   const [messagesState, setMessagesState] = useState([{uid: 'osifdnaof'}]);
 
   useEffect(() => {
-    const fetchData = async (filters: any) => {
+    // const fetchData = async (filters: any) => {
+    //   const url: string = config.fetchUrl;
+
+    //   const response = await fetch(url,
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'text/plain',
+    //       },
+    //       // body: JSON.stringify(filters),
+    //       body: JSON.stringify({filters: 'some filters'}),
+    //     },
+    //   );
+
+    //   const news = await response.json();
+      
+    //   news.forEach((item: any) => {
+    //     item.uid = Math.random();
+    //   });
+
+    //   return news;
+    // };
+
+    // fetchData({}).then((news) => {
+    //   setMessagesState(news);
+    // });
+
+    const fetchDataGet = async (filters: any) => {
       const url: string = config.fetchUrl;
 
-      const response = await fetch(url,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-          // body: JSON.stringify(filters),
-          body: JSON.stringify({filters: 'some filters'}),
-        },
-      );
+      const response = await fetch(url);
 
       const news = await response.json();
       
-      news.forEach((item: any) => {
-        item.uid = Math.random();
-      });
+      // news.forEach((item: any) => {
+      //   item.uid = Math.random();
+      // });
 
       return news;
     };
 
-    fetchData({}).then((news) => {
-      setMessagesState(news);
+    fetchDataGet({}).then((news) => {
+      console.log(news);
     });
 
     const chatSocket: socketInterface = new MySocket();
-
+    
     const handleNewsEvent = (event: any) => {
+      console.log(event);
+
       setMessagesState(lastState => {
         const msg = event.detail.msg;
-        msg.uid = (Math.random() * 100000);
+        msg.uid = Math.random();
 
         return [msg, ...lastState];
       });

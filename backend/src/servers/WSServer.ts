@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { WebSocketServer, createWebSocketStream } from 'ws';
-import { myEmitter } from '../modules/myEmitter';
+import { dbConnection } from '../modules/dbConnection';
+// import { myEmitter } from '../modules/myEmitter';
 
 const BACK_PORT: string = process.env.BACK_PORT || '3030';
 
@@ -23,18 +24,44 @@ export const startWsServer = (): void => {
       `New client connected!\nDuplex stream created with encoding: 'utf8', decodeStrings: false,\n`
     );
 
-    myEmitter.on('news', (event) => {
-      console.log('event: ', event);
+    // myEmitter.on('news', (event) => {
+    //   console.log('event: ', event);
 
-      const date = new Date();
-      const messageObj = {
-        type: 'news',
-        msg: event,
-      };
-      console.log('messageObj: ', messageObj);
+    //   const date = new Date();
+    //   const messageObj = {
+    //     type: 'news',
+    //     msg: event,
+    //   };
+    //   console.log('messageObj: ', messageObj);
 
-      duplex.write(JSON.stringify(messageObj));
-    });
+    //   duplex.write(JSON.stringify(messageObj));
+    // });
+
+    // myEmitter.on('news', (event) => {
+    //   console.log('event: ', event);
+
+    //   const date = new Date();
+    //   const messageObj = {
+    //     type: 'news',
+    //     msg: event,
+    //   };
+    //   console.log('messageObj: ', messageObj);
+
+    //   duplex.write(JSON.stringify(messageObj));
+    // });
+    
+    duplex.write(JSON.stringify({234: 'Sample websocket msg'}));
+
+    const sendToFront = async () => {
+      // const news = await dbConnection.getNews();
+      
+      setTimeout(() => {
+        duplex.write(JSON.stringify({234: 'Sample websocket msg'}));
+        sendToFront();
+      }, 1000);
+    };
+
+    sendToFront();
 
     for await (const chunk of duplex) {
       try {

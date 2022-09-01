@@ -17,12 +17,25 @@ export const startHttpServer = (): void => {
     app.post('/', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
 
-      const body = res.body;
+      const body = req.body;
       console.log('body: ', body);
 
       const news = await dbConnection.getNews();
       
       res.send(JSON.stringify(news));
+    });
+  } catch(err) {
+    console.error(err);
+  }
+
+  try {
+    app.get('/', async (req: any, res: any) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+
+      // const news = await dbConnection.getNews();
+      
+      // res.send(JSON.stringify(news));
+      res.send(JSON.stringify({234: '234d'}));
     });
   } catch(err) {
     console.error(err);

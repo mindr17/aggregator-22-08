@@ -1892,7 +1892,7 @@ var require_extension = __commonJS({
 var require_websocket = __commonJS({
   "node_modules/ws/lib/websocket.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events");
+    var EventEmitter = __require("events");
     var https = __require("https");
     var http = __require("http");
     var net = __require("net");
@@ -1923,7 +1923,7 @@ var require_websocket = __commonJS({
     var protocolVersions = [8, 13];
     var readyStates = ["CONNECTING", "OPEN", "CLOSING", "CLOSED"];
     var subprotocolRegex = /^[!#$%&'*+\-.0-9A-Z^_`|a-z~]+$/;
-    var WebSocket2 = class extends EventEmitter2 {
+    var WebSocket2 = class extends EventEmitter {
       constructor(address, protocols, options) {
         super();
         this._binaryType = BINARY_TYPES[0];
@@ -2673,7 +2673,7 @@ var require_subprotocol = __commonJS({
 var require_websocket_server = __commonJS({
   "node_modules/ws/lib/websocket-server.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events");
+    var EventEmitter = __require("events");
     var http = __require("http");
     var https = __require("https");
     var net = __require("net");
@@ -2688,7 +2688,7 @@ var require_websocket_server = __commonJS({
     var RUNNING = 0;
     var CLOSING = 1;
     var CLOSED = 2;
-    var WebSocketServer2 = class extends EventEmitter2 {
+    var WebSocketServer2 = class extends EventEmitter {
       constructor(options, callback) {
         super();
         options = {
@@ -4302,7 +4302,7 @@ var require_src = __commonJS({
 var require_destroy = __commonJS({
   "node_modules/destroy/index.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var ReadStream = __require("fs").ReadStream;
     var Stream = __require("stream");
     var Zlib = __require("zlib");
@@ -4364,7 +4364,7 @@ var require_destroy = __commonJS({
       return stream instanceof Stream && typeof stream.destroy === "function";
     }
     function isEventEmitter(val) {
-      return val instanceof EventEmitter2;
+      return val instanceof EventEmitter;
     }
     function isFsReadStream(stream) {
       return stream instanceof ReadStream;
@@ -24687,7 +24687,7 @@ var require_express = __commonJS({
   "node_modules/express/lib/express.js"(exports, module) {
     "use strict";
     var bodyParser2 = require_body_parser();
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var mixin = require_merge_descriptors();
     var proto = require_application();
     var Route = require_route();
@@ -24699,7 +24699,7 @@ var require_express = __commonJS({
       var app = function(req2, res2, next) {
         app.handle(req2, res2, next);
       };
-      mixin(app, EventEmitter2.prototype, false);
+      mixin(app, EventEmitter.prototype, false);
       mixin(app, proto, false);
       app.request = Object.create(req, {
         app: { configurable: true, enumerable: true, writable: true, value: app }
@@ -26682,10 +26682,10 @@ var require_result = __commonJS({
 var require_query2 = __commonJS({
   "node_modules/pg/lib/query.js"(exports, module) {
     "use strict";
-    var { EventEmitter: EventEmitter2 } = __require("events");
+    var { EventEmitter } = __require("events");
     var Result = require_result();
     var utils = require_utils3();
-    var Query = class extends EventEmitter2 {
+    var Query = class extends EventEmitter {
       constructor(config, values, callback) {
         super();
         config = utils.normalizeQueryConfig(config, values, callback);
@@ -27651,12 +27651,12 @@ var require_connection = __commonJS({
   "node_modules/pg/lib/connection.js"(exports, module) {
     "use strict";
     var net = __require("net");
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var { parse, serialize } = require_dist();
     var flushBuffer = serialize.flush();
     var syncBuffer = serialize.sync();
     var endBuffer = serialize.end();
-    var Connection = class extends EventEmitter2 {
+    var Connection = class extends EventEmitter {
       constructor(config) {
         super();
         config = config || {};
@@ -27832,7 +27832,7 @@ var require_connection = __commonJS({
 var require_client = __commonJS({
   "node_modules/pg/lib/client.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var util = __require("util");
     var utils = require_utils3();
     var sasl = require_sasl();
@@ -27842,7 +27842,7 @@ var require_client = __commonJS({
     var Query = require_query2();
     var defaults = require_defaults();
     var Connection = require_connection();
-    var Client2 = class extends EventEmitter2 {
+    var Client2 = class extends EventEmitter {
       constructor(config) {
         super();
         this.connectionParameters = new ConnectionParameters(config);
@@ -28322,7 +28322,7 @@ var require_client = __commonJS({
 var require_pg_pool = __commonJS({
   "node_modules/pg-pool/index.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var NOOP = function() {
     };
     var removeWhere = (list, predicate) => {
@@ -28370,7 +28370,7 @@ var require_pg_pool = __commonJS({
         pool.emit("error", err, client);
       };
     }
-    var Pool = class extends EventEmitter2 {
+    var Pool = class extends EventEmitter {
       constructor(options, Client2) {
         super();
         this.options = Object.assign({}, options);
@@ -28760,11 +28760,11 @@ var require_package = __commonJS({
 var require_query3 = __commonJS({
   "node_modules/pg/lib/native/query.js"(exports, module) {
     "use strict";
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var util = __require("util");
     var utils = require_utils3();
     var NativeQuery = module.exports = function(config, values, callback) {
-      EventEmitter2.call(this);
+      EventEmitter.call(this);
       config = utils.normalizeQueryConfig(config, values, callback);
       this.text = config.text;
       this.values = config.values;
@@ -28781,7 +28781,7 @@ var require_query3 = __commonJS({
         }.bind(this)
       );
     };
-    util.inherits(NativeQuery, EventEmitter2);
+    util.inherits(NativeQuery, EventEmitter);
     var errorFieldMap = {
       sqlState: "code",
       statementPosition: "position",
@@ -28904,12 +28904,12 @@ var require_client2 = __commonJS({
     var Native = __require("pg-native");
     var TypeOverrides = require_type_overrides();
     var pkg = require_package();
-    var EventEmitter2 = __require("events").EventEmitter;
+    var EventEmitter = __require("events").EventEmitter;
     var util = __require("util");
     var ConnectionParameters = require_connection_parameters();
     var NativeQuery = require_query3();
     var Client2 = module.exports = function(config) {
-      EventEmitter2.call(this);
+      EventEmitter.call(this);
       config = config || {};
       this._Promise = config.Promise || global.Promise;
       this._types = new TypeOverrides(config.types);
@@ -28935,7 +28935,7 @@ var require_client2 = __commonJS({
       this.namedQueries = {};
     };
     Client2.Query = NativeQuery;
-    util.inherits(Client2, EventEmitter2);
+    util.inherits(Client2, EventEmitter);
     Client2.prototype._errorAllQueries = function(err) {
       const enqueueError = (query) => {
         process.nextTick(() => {
@@ -29208,10 +29208,6 @@ var import_sender = __toESM(require_sender(), 1);
 var import_websocket = __toESM(require_websocket(), 1);
 var import_websocket_server = __toESM(require_websocket_server(), 1);
 
-// src/modules/myEmitter.ts
-import { EventEmitter } from "events";
-var myEmitter = new EventEmitter();
-
 // src/servers/WSServer.ts
 var BACK_PORT = process.env.BACK_PORT || "3030";
 var startWsServer = () => {
@@ -29230,16 +29226,14 @@ var startWsServer = () => {
 Duplex stream created with encoding: 'utf8', decodeStrings: false,
 `
     );
-    myEmitter.on("news", (event) => {
-      console.log("event: ", event);
-      const date = new Date();
-      const messageObj = {
-        type: "news",
-        msg: event
-      };
-      console.log("messageObj: ", messageObj);
-      duplex.write(JSON.stringify(messageObj));
-    });
+    duplex.write(JSON.stringify({ 234: "Sample websocket msg" }));
+    const sendToFront = async () => {
+      setTimeout(() => {
+        duplex.write(JSON.stringify({ 234: "Sample websocket msg" }));
+        sendToFront();
+      }, 1e3);
+    };
+    sendToFront();
     for await (const chunk of duplex) {
       try {
         console.log(`Recieved: ${chunk}`);
@@ -29254,33 +29248,38 @@ Duplex stream created with encoding: 'utf8', decodeStrings: false,
 };
 
 // src/servers/httpServer.ts
-var import_express = __toESM(require_express2(), 1);
-var import_body_parser = __toESM(require_body_parser(), 1);
+var import_express = __toESM(require_express2());
+var import_body_parser = __toESM(require_body_parser());
 
 // src/modules/dbConnection.ts
-var import_pg = __toESM(require_lib4(), 1);
+var import_pg = __toESM(require_lib4());
 var { Client } = import_pg.default;
 var DbConnection = class {
   _client;
   constructor() {
   }
   async getNews() {
-    const res = await new Promise(
-      (resolve) => {
-        this._client = new Client({
-          user: "postgres",
-          database: "aggregator",
-          password: "postgres",
-          host: "localhost"
-        });
-        this._client.connect();
-        this._client.query("SELECT * FROM get_news('2022-08-08 04:05:06');", (err, res2) => {
-          this._client.end();
-          resolve(res2.rows);
-        });
-      }
-    );
-    return res;
+    try {
+      const res = await new Promise(
+        async (resolve) => {
+          this._client = new Client({
+            user: "postgres",
+            database: "aggregator",
+            password: "postgres",
+            host: "localhost"
+          });
+          await this._client.connect();
+          await this._client.query("SELECT * FROM get_news('2022-08-08 04:05:06');", async (err, res2) => {
+            await this._client.end();
+            resolve(res2.rows);
+          });
+        }
+      );
+      return res;
+    } catch (e) {
+      console.log(`error: ${e}`);
+    }
+    ;
   }
   async getPrices() {
     const res = await new Promise(
@@ -29348,10 +29347,18 @@ var startHttpServer = () => {
   try {
     app.post("/", async (req, res) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
-      const body = res.body;
+      const body = req.body;
       console.log("body: ", body);
       const news = await dbConnection.getNews();
       res.send(JSON.stringify(news));
+    });
+  } catch (err) {
+    console.error(err);
+  }
+  try {
+    app.get("/", async (req, res) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({ 234: "234d" }));
     });
   } catch (err) {
     console.error(err);
