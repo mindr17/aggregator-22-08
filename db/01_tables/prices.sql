@@ -3,4 +3,4 @@ CREATE TABLE IF NOT EXISTS prices (
   date TIMESTAMP NOT NULL, 
   ticker VARCHAR NOT NULL,
   price DECIMAL NOT NULL
-)
+);
