@@ -8,6 +8,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  basePath: '/aggregator',
   // webpack: (
   //   config,
   //   { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
