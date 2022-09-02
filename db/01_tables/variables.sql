@@ -3,4 +3,4 @@ CREATE TABLE IF NOT EXISTS variables (
   name VARCHAR NOT NULL,
   value VARCHAR NULL,
   CONSTRAINT name_unique UNIQUE (name)
-)
+);
