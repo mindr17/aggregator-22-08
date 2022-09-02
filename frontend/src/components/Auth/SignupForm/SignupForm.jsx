@@ -1,13 +1,11 @@
 import styles from './SignupForm.module.scss';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useHttp from '../../../hooks/http.hook';
 import useMessage from '../../../hooks/message.hook';
-import AuthContext from '../../../context/AuthContext';
 
-function SignupForm() {
+function SignupForm({ handleShowLogin }) {
     const { load, error, request, clearError } = useHttp();
     const message = useMessage();
-    const auth = useContext(AuthContext);
     const [show, setShow] = useState(false);
     const [form, setForm] = useState({
         email: '',
@@ -23,20 +21,18 @@ function SignupForm() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    const clearForm = () => {
+        setForm({
+            email: '',
+            password: ''
+        });
+    }
+
     const registerHandler = async () => {
         try {
             const data = await request('http://localhost:5000/api/auth/register', 'POST', { ...form });
             message(data.message);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const loginHandler = async () => {
-        try {
-            const data = await request('http://localhost:5000/api/auth/login', 'POST', { ...form });
-            auth.login(data.token, data.userId);
-            message(data.message);
+            clearForm();
         } catch (err) {
             console.log(err);
         }
@@ -48,8 +44,9 @@ function SignupForm() {
 
     return (
         <div className={styles.signup}>
-            <div>
-                <div>
+            <h2 className={styles.formTitle}>Create your account</h2>
+            <form className={styles.signupForm}>
+                <div className={styles.formField}>
                     <label htmlFor="email">
                         Email
                     </label>
@@ -58,10 +55,12 @@ function SignupForm() {
                         id="email"
                         type="email"
                         name="email"
+                        value={form.email}
+                        autoComplete="on"
                         onChange={changeHandler}
                     />
                 </div>
-                <div>
+                <div className={styles.formField}>
                     <label htmlFor="password">
                         Password
                     </label>
@@ -70,6 +69,7 @@ function SignupForm() {
                         id="password"
                         type={show ? 'text' : 'password'}
                         name="password"
+                        value={form.password}
                         onChange={changeHandler}
                     />
                     {show ? (
@@ -78,15 +78,11 @@ function SignupForm() {
                         <span aria-hidden onClick={showPassword} className={styles.spanOff} />
                     )}
                 </div>
-            </div>
-            <div>
-                <button onClick={loginHandler} disabled={load} type="button">
-                    Log in
-                </button>
-                <button onClick={registerHandler} disabled={load} type="button">
+                <button className={styles.formBtn} onClick={registerHandler} disabled={load} type="button">
                     Sign up
                 </button>
-            </div>
+            </form>
+            <div>Already have an account? <span className={styles.span} onClick={handleShowLogin}>Log In</span></div>
         </div>
     );
 }

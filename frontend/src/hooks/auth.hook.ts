@@ -6,7 +6,7 @@ const useAuth = () => {
     const [token, setToken] = useState('');
     const [userId, setUserId] = useState('');
 
-    const login = useCallback((jwtToken: string, id: string) => {
+    const login = (jwtToken: string, id: string) => {
         setToken(jwtToken);
         setUserId(id);
 
@@ -17,13 +17,13 @@ const useAuth = () => {
                 token: jwtToken
             })
         );
-    }, []);
+    };
 
-    const logout = useCallback(() => {
+    const logout = (() => {
         setToken('');
         setUserId('');
         localStorage.removeItem(storageName);
-    }, []);
+    })
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem(storageName) || '{}');

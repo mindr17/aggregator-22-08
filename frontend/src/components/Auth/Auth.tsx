@@ -10,14 +10,13 @@ const Auth: React.FC = () => {
   const handleShowLogin = () => {
     setShowLogin(!showLogin)
   }
-  console.log(showLogin)
+  // console.log(showLogin);
 
   return (
     <div>
-      <SignupForm />
-      {/* {showLogin ?
+      {showLogin ?
         <LoginForm handleShowLogin={handleShowLogin} /> :
-        <SignupForm handleShowLogin={handleShowLogin} />} */}
+        <SignupForm handleShowLogin={handleShowLogin} />}
     </div>
   )
 }

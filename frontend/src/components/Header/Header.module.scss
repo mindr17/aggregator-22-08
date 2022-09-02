@@ -14,20 +14,35 @@
         justify-content: space-between;
         align-items: center;
 
-        .login {
-            color: $color-font-primary;
-            background-color: $color-bg-primary;
-            border: 0.05rem solid $color-font-primary;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            transition: $transition;
+        .authGroup {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
 
-            &:hover {
-                color: $color-font-secondary;
-                border-color: $color-font-secondary;
-                background-color: $color-bg-secondary;
-                cursor: pointer;
+            .imageWrapper {
+                border-radius: 50%;
+                overflow: hidden;
+                width: 4.5rem;
+                height: 4.5rem;
+                border: 0.1rem solid $color-font-secondary;
             }
+
+            .btn {
+                color: $color-font-primary;
+                background-color: $color-bg-primary;
+                border: 0.05rem solid $color-font-primary;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                transition: $transition;
+
+                &:hover {
+                    color: $color-font-secondary;
+                    border-color: $color-font-secondary;
+                    background-color: $color-bg-secondary;
+                    cursor: pointer;
+                }
+            }
+
         }
     }
 }

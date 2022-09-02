@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const navgation = [
   { id: 1, title: 'Home', path: '/' },
   { id: 2, title: 'News', path: '/news' },
-  { id: 2, title: 'Backtesting', path: '/backtesting' },
+  { id: 3, title: 'Backtesting', path: '/backtesting' },
 ]
 
 
