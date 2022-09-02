@@ -1,7 +1,6 @@
 #!/bin/bash
 PROJECT_NAME="aggregator-frontend"
 HOST="banana"
-# FRONTEND_DIR="/var/www/html/public"
 FRONTEND_DIR="/root/aggregator/frontend"
 
 echo "Uploading"

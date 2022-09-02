@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '../src/styles/Home.module.scss'
+import styles from '../src/styles/Home.module.scss';
 
 function Home (props: any) {
   const [messages, setMessages] = useState(['Template message']);
