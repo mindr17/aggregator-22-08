@@ -29344,25 +29344,25 @@ var startHttpServer = () => {
   const app = (0, import_express.default)();
   app.use(import_body_parser.default.urlencoded({ extended: false }));
   app.use(import_body_parser.default.json());
-  try {
-    app.post("/", async (req, res) => {
+  app.get("/", async (req, res) => {
+    try {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({ 234: "234d" }));
+    } catch (err) {
+      console.error(err);
+    }
+  });
+  app.post("/", async (req, res) => {
+    try {
       res.setHeader("Access-Control-Allow-Origin", "*");
       const body = req.body;
       console.log("body: ", body);
       const news = await dbConnection.getNews();
       res.send(JSON.stringify(news));
-    });
-  } catch (err) {
-    console.error(err);
-  }
-  try {
-    app.get("/", async (req, res) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.send(JSON.stringify({ 234: "234d" }));
-    });
-  } catch (err) {
-    console.error(err);
-  }
+    } catch (err) {
+      console.error(err);
+    }
+  });
   app.listen(port, () => {
     console.log(`Fetch api listening at http://localhost:${port}`);
   });

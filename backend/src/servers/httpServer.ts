@@ -12,9 +12,18 @@ export const startHttpServer = (): void => {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  
+  app.get('/', async (req: any, res: any) => {
+    try {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({234: '234d'}));
+    } catch(err) {
+      console.error(err);
+    }
+  });
 
-  try {
-    app.post('/', async (req: any, res: any) => {
+  app.post('/', async (req: any, res: any) => {
+    try {
       res.setHeader("Access-Control-Allow-Origin", "*");
 
       const body = req.body;
@@ -23,23 +32,10 @@ export const startHttpServer = (): void => {
       const news = await dbConnection.getNews();
       
       res.send(JSON.stringify(news));
-    });
-  } catch(err) {
-    console.error(err);
-  }
-
-  try {
-    app.get('/', async (req: any, res: any) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-
-      // const news = await dbConnection.getNews();
-      
-      // res.send(JSON.stringify(news));
-      res.send(JSON.stringify({234: '234d'}));
-    });
-  } catch(err) {
-    console.error(err);
-  }
+    } catch(err) {
+      console.error(err);
+    }
+  });
 
   app.listen(port, () => {
     console.log(`Fetch api listening at http://localhost:${port}`);
