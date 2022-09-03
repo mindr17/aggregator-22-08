@@ -2,21 +2,27 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
-import useAuth from '../../hooks/auth.hook';
+import useMessage from '../../hooks/message.hook';
 import styles from './Header.module.scss';
 import Navbar from './Navbar/Navbar';
 import ThemeToggle from './Navbar/ThemeToggle/ThemeToggle';
 
 const Header: React.FC = () => {
   const auth = useContext(AuthContext);
-  const { token } = useAuth();
   const router = useRouter();
-  const isAuthenticated = !!token;
-  console.log(isAuthenticated);
+  const message = useMessage();
+  const isAuthenticated = !!auth.token;
 
   const logoutHandler = () => {
-    auth.logout();
-    router.push('/');
+    message('You have successfully logged out!');
+    setTimeout(() => {
+      router.push('/');
+      auth.logout();
+    }, 3000);
+  };
+
+  const handleOnClick = () => {
+    auth.toggleShowForm();
   };
 
   return (
@@ -38,7 +44,7 @@ const Header: React.FC = () => {
                 </div>
               </>
             ) : (
-              <button className={styles.btn}>Login</button>
+              <button className={styles.btn} onClick={handleOnClick}>Login</button>
             )}
           </div>
           <div className={styles.settings}>

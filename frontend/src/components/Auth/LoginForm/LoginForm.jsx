@@ -42,7 +42,8 @@ const LoginForm = ({ handleShowLogin }) => {
       auth.login(data.token, data.userId);
       message(data.message);
       clearForm();
-      router.push('/news');
+      auth.toggleShowForm();
+      setTimeout(() => router.push('/news'), 3000);
     } catch (err) {
       console.log(err);
     }
