@@ -13,14 +13,13 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-
   const { login, logout, token, userId } = useAuth();
   const isAuthenticated = !!token;
 
   useEffect(() => {
     const { pathname } = Router;
     if (!isAuthenticated && pathname !== '/') {
-      Router.push('/')
+      Router.push('/');
     }
   });
 
@@ -31,7 +30,7 @@ const Layout = ({ children }: Props) => {
         <main className={styles.main}>{children}</main>
         <Footer />
         <ToastContainer
-          position="top-center"
+          position='top-center'
           autoClose={1500}
           hideProgressBar={false}
           newestOnTop={false}

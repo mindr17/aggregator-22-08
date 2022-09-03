@@ -3,26 +3,24 @@ import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
 
-function Home (props: any) {
-  const [messagesState, setMessagesState] = useState([{uid: 'osifdnaof'}]);
+function Home(props: any) {
+  const [messagesState, setMessagesState] = useState([{ uid: 'osifdnaof' }]);
 
   useEffect(() => {
     const fetchData = async (filters: any) => {
       const url: string = config.fetchUrl;
 
-      const response = await fetch(url,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-          // body: JSON.stringify(filters),
-          body: JSON.stringify({filters: 'some filters'}),
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain',
         },
-      );
+        // body: JSON.stringify(filters),
+        body: JSON.stringify({ filters: 'some filters' }),
+      });
 
       const news = await response.json();
-      
+
       news.forEach((item: any) => {
         item.uid = Math.random();
       });
@@ -37,9 +35,9 @@ function Home (props: any) {
     const chatSocket: socketInterface = new MySocket();
 
     const handleNewsEvent = (event: any) => {
-      setMessagesState(lastState => {
+      setMessagesState((lastState) => {
         const msg = event.detail.msg;
-        msg.uid = (Math.random() * 100000);
+        msg.uid = Math.random() * 100000;
 
         return [msg, ...lastState];
       });
@@ -47,26 +45,22 @@ function Home (props: any) {
 
     window.addEventListener('news', handleNewsEvent);
 
-    return (
-      () => {
-        chatSocket.destroy();
+    return () => {
+      chatSocket.destroy();
 
-        window.removeEventListener('news', handleNewsEvent);
-      }
-    );
+      window.removeEventListener('news', handleNewsEvent);
+    };
   }, []);
 
   return (
     <>
       <div>
-        {
-          messagesState.map((message: any) => {
-            return <div key={message.uid}>{JSON.stringify(message)}</div>;
-          })
-        }
+        {messagesState.map((message: any) => {
+          return <div key={message.uid}>{JSON.stringify(message)}</div>;
+        })}
       </div>
     </>
   );
-};
+}
 
 export default Home;

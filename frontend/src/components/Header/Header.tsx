@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const auth = useContext(AuthContext);
   const { token } = useAuth();
   const router = useRouter();
-  const isAuthenticated = (!!token);
+  const isAuthenticated = !!token;
   console.log(isAuthenticated);
 
   const logoutHandler = () => {
@@ -19,30 +19,36 @@ const Header: React.FC = () => {
     router.push('/');
   };
 
-
-
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <h1 className={styles.logo}>
+        <h1 className={styles.logo} onClick={() => router.push('/')}>
           <Image src='/img/icons8-financial-analytics-64.png' width={60} height={60} alt='logo' />
         </h1>
         {isAuthenticated && <Navbar />}
-        <div className={styles.authGroup}>
-          {isAuthenticated ?
-            <>
-              <button className={styles.btn} onClick={logoutHandler}>Logout</button>
-              <div className={styles.imageWrapper}>
-                <Image src='/img/abstract-user-flat-4.svg' width={45} height={45} alt='avatar' />
-              </div>
-            </> :
-            <button className={styles.btn}>Login</button>}
-
-        </div>
-        <div>
-          <ThemeToggle />
-          <input type='select' />
+        <div className={styles.rightGroup}>
+          <div className={styles.authGroup}>
+            {isAuthenticated ? (
+              <>
+                <button className={styles.btn} onClick={logoutHandler}>
+                  Logout
+                </button>
+                <div className={styles.imageWrapper}>
+                  <Image src='/img/abstract-user-flat-4.svg' width={45} height={45} alt='avatar' />
+                </div>
+              </>
+            ) : (
+              <button className={styles.btn}>Login</button>
+            )}
+          </div>
+          <div className={styles.settings}>
+            <select className={styles.select}>
+              <option value='en'>EN</option>
+              <option value='ru'>RU</option>
+              <option value='de'>DE</option>
+            </select>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>
