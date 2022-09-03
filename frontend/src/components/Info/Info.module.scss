@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title {
+        font-size: 3rem;
+        margin: 2rem 0;
+        align-self: center;
+    }
+
+    .student {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+
+        .imageWrapper {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 15rem;
+            height: 15rem;
+            border: 0.1rem solid $color-font-primary;
+        }
+
+        .studentsInfo {
+            margin-left: 2rem;
+
+            .studentTitle {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+
+}

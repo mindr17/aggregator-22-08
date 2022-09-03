@@ -6,7 +6,9 @@ const AuthContext = createContext({
     userId: '',
     login: noop,
     logout: noop,
-    isAuthenticated: false
+    isAuthenticated: false,
+    isShowForm: false,
+    toggleShowForm: () => { }
 });
 
 export default AuthContext;

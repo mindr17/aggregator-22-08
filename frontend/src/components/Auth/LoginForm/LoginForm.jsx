@@ -1,70 +1,102 @@
 import styles from './LoginForm.module.scss';
-import { Formik } from 'formik';
+import React, { useContext, useEffect, useState } from 'react';
+import useHttp from '../../../hooks/http.hook';
+import useMessage from '../../../hooks/message.hook';
+import AuthContext from '../../../context/AuthContext';
+import { useRouter } from 'next/router';
 
 // interface IProps {
 //     handleShowLogin: () => void,
 // }
 
 const LoginForm = ({ handleShowLogin }) => {
-    return (
-        <div className={styles.login}>
-            <h2>Login</h2>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                        errors.email = 'Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
-                    }
-                    return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
-                }}
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                    /* and other goodies */
-                }) => (
-                    <form className={styles.loginForm} onSubmit={handleSubmit}>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
-                        {errors.email && touched.email && errors.email}
-                        <input
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                        />
-                        {errors.password && touched.password && errors.password}
-                        <button type="submit" disabled={isSubmitting}>
-                            Log In
-                        </button>
-                        <span onClick={handleShowLogin}>Signup</span>
-                    </form>
-                )}
-            </Formik>
+  const { load, error, request, clearError } = useHttp();
+  const message = useMessage();
+  const auth = useContext(AuthContext);
+  const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  useEffect(() => {
+    message(error);
+    clearError();
+  }, [error, message, clearError]);
+
+  const changeHandler = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const clearForm = () => {
+    setForm({
+      email: '',
+      password: '',
+    });
+  };
+
+  const loginHandler = async () => {
+    try {
+      const data = await request('http://localhost:5000/api/auth/login', 'POST', { ...form });
+      auth.login(data.token, data.userId);
+      message(data.message);
+      clearForm();
+      auth.toggleShowForm();
+      setTimeout(() => router.push('/news'), 3000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const showPassword = () => {
+    setShow(!show);
+  };
+
+  return (
+    <div className={styles.login}>
+      <h2>Log in to your account</h2>
+      <form className={styles.loginForm}>
+        <div className={styles.formField}>
+          <label htmlFor='email'>Email</label>
+          <input
+            placeholder='Enter your email'
+            id='email'
+            type='email'
+            name='email'
+            value={form.email}
+            onChange={changeHandler}
+          />
         </div>
-    )
-}
+        <div className={styles.formField}>
+          <label htmlFor='password'>Password</label>
+          <input
+            placeholder='Enter your password'
+            id='password'
+            type={show ? 'text' : 'password'}
+            name='password'
+            value={form.password}
+            autoComplete='on'
+            onChange={changeHandler}
+          />
+          {show ? (
+            <span aria-hidden onClick={showPassword} className={styles.spanOn} />
+          ) : (
+            <span aria-hidden onClick={showPassword} className={styles.spanOff} />
+          )}
+        </div>
+        <button className={styles.formBtn} onClick={loginHandler} disabled={load} type='button'>
+          Log in
+        </button>
+      </form>
+      <div>
+        Don't have an account?{' '}
+        <span className={styles.span} onClick={handleShowLogin}>
+          Sign Up
+        </span>
+      </div>
+    </div>
+  );
+};
 
 export default LoginForm;

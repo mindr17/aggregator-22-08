@@ -4,22 +4,21 @@ import LoginForm from './LoginForm/LoginForm';
 import SignupForm from './SignupForm/SignupForm';
 
 const Auth: React.FC = () => {
-
   const [showLogin, setShowLogin] = useState<boolean>(true);
 
   const handleShowLogin = () => {
-    setShowLogin(!showLogin)
-  }
-  console.log(showLogin)
+    setShowLogin(!showLogin);
+  };
 
   return (
     <div>
-      <SignupForm />
-      {/* {showLogin ?
-        <LoginForm handleShowLogin={handleShowLogin} /> :
-        <SignupForm handleShowLogin={handleShowLogin} />} */}
+      {showLogin ? (
+        <LoginForm handleShowLogin={handleShowLogin} />
+      ) : (
+        <SignupForm handleShowLogin={handleShowLogin} />
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Auth;
