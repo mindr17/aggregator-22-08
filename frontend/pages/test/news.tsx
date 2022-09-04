@@ -4,7 +4,7 @@ import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
 
 function Home(props: any) {
-  const [messagesState, setMessagesState] = useState([{ uid: 'osifdnaof' }]);
+  const [messagesState, setMessagesState] = useState([{ uid: Math.random() }]);
 
   useEffect(() => {
     const fetchData = async (filters: any) => {
@@ -15,7 +15,6 @@ function Home(props: any) {
         headers: {
           'Content-Type': 'text/plain',
         },
-        // body: JSON.stringify(filters),
         body: JSON.stringify({ filters: 'some filters' }),
       });
 

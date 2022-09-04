@@ -22,12 +22,12 @@ const Layout = ({ children }: Props) => {
 
   const isAuthenticated = !!token;
 
-  useEffect(() => {
-    const { pathname } = Router;
-    if (!isAuthenticated && pathname !== '/') {
-      setTimeout(() => Router.push('/'), 3000);
-    }
-  });
+  // useEffect(() => {
+  //   const { pathname } = Router;
+  //   if (!isAuthenticated && pathname !== '/') {
+  //     setTimeout(() => Router.push('/'), 3000);
+  //   }
+  // });
 
   return (
     <AuthContext.Provider value={{ login, logout, token, userId, isAuthenticated, isShowForm, toggleShowForm }}>
