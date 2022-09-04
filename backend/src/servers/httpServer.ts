@@ -3,10 +3,13 @@ import express from "express";
 import bodyParser from "body-parser";
 import { dbConnection } from '../modules/dbConnection';
 import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
+import cors from "cors";
 
 export const startHttpServer = (): void => {
   const port = '3031';
   const app = express();
+
+  app.use(cors());
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());

@@ -4,7 +4,7 @@ import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
 
-const Home: NextPage = (props: any) => {
+const NewsPage: NextPage = (props: any) => {
   const [messagesState, setMessagesState] = useState([{ uid: 'test' }]);
 
   useEffect(() => {
@@ -64,4 +64,4 @@ const Home: NextPage = (props: any) => {
   );
 }
 
-export default Home;
+export default NewsPage;

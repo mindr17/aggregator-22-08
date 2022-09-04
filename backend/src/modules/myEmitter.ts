@@ -1,3 +1,3 @@
-import { EventEmitter } from 'events';
+// import events from 'events';
 
-export const myEmitter = new EventEmitter();
+// export const myEmitter = new events.EventEmitter();
