@@ -14,6 +14,7 @@
     "fast-xml-parser": "^4.0.9",
     "pg": "^8.8.0",
     "rss-parser": "^3.12.0",
+    "tradingview-ws": "^0.0.3",
     "typescript": "^4.7.4"
   },
   "devDependencies": {
