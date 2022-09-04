@@ -1,12 +1,34 @@
 {
-  "timeout": 10000,
+  "newsTimeout": 5000,
+  "pricesTimeout": 600000,
   "rss": {
-    "gazprom": "https://gazprom.ru/rss",
-    "vedomosti": "https://www.vedomosti.ru/rss/rubric/finance/markets",
-    "news_ru": "https://news.ru/rss/category/post/economics/",
-    "mk_ru": "https://www.mk.ru/rss/economics/index.xml",
-    "oon": "https://news.un.org/feed/subscribe/ru/tags/fincrisis/feed/rss.xml",
-    "prime": "https://1prime.ru/export/rss2/state_regulation/index.xml",
-    "finam": "https://bonds.finam.ru/news/today/rss.asp"
+    "gazprom": {
+      "url": "https://gazprom.ru/rss",
+      "ticker": "GAZP"
+    },
+    "vedomosti": {
+      "url": "https://www.vedomosti.ru/rss/rubric/finance/markets",
+      "ticker": "SBER"
+    },
+    "news_ru": {
+      "url": "https://news.ru/rss/category/post/economics/",
+      "ticker": "LKO"
+    },
+    "mk_ru": {
+      "url": "https://www.mk.ru/rss/economics/index.xml",
+      "ticker": "CUM"
+    },
+    "oon": {
+      "url": "https://news.un.org/feed/subscribe/ru/tags/fincrisis/feed/rss.xml",
+      "ticker": "MSFT"
+    },
+    "prime": {
+      "url": "https://1prime.ru/export/rss2/state_regulation/index.xml",
+      "ticker": "ROSN"
+    },
+    "finam": {
+      "url": "https://bonds.finam.ru/news/today/rss.asp",
+      "ticker": "ROSB"
+    }
   }
 }
