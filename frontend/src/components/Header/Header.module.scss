@@ -1,16 +1,74 @@
-@import '../../styles/variables';
+@import '../../styles/variables.scss';
 
 .header {
     background-color: $color-bg-primary;
     color: $color-font-primary;
     font-size: $size-text;
+    width: 100%;
 
     .container {
         margin: 0 auto;
         padding: 0 2rem;
-        width: 180rem;
+        max-width: 180rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .logo {
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .rightGroup {
+
+            display: flex;
+            gap: 2.5rem;
+
+            .authGroup {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+
+                .imageWrapper {
+                    border-radius: 50%;
+                    overflow: hidden;
+                    width: 4.5rem;
+                    height: 4.5rem;
+                    border: 0.1rem solid $color-font-secondary;
+                }
+
+                .btn {
+                    color: $color-font-primary;
+                    background-color: $color-bg-primary;
+                    border: 0.05rem solid $color-font-primary;
+                    padding: 1rem;
+                    border-radius: 0.5rem;
+                    transition: $transition;
+
+                    &:hover {
+                        color: $color-font-secondary;
+                        border-color: $color-font-secondary;
+                        background-color: $color-bg-secondary;
+                        cursor: pointer;
+                    }
+                }
+
+            }
+
+            .settings {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+
+                .select {
+                    color: $color-font-primary;
+                    background-color: $color-bg-primary;
+                    border: 0.05rem solid $color-font-primary;
+                    border-radius: 0.5rem;
+                    height: 4rem;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }

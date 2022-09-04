@@ -3,10 +3,12 @@ const configTemplate = {
     port: 3030,
   },
   "devConfig": {
-    url: 'ws://localhost:3030/',
+    fetchUrl: 'http://localhost:3031/',
+    wsUrl: 'ws://localhost:3030/',
   },
   "prodConfig": {
-    url: 'wss://bananasite.ru/api/aggregator',
+    fetchUrl: 'https://bananasite.ru/api/aggregator/fetch',
+    wsUrl: 'wss://bananasite.ru/api/aggregator/ws',
   },
 };
 
@@ -19,5 +21,5 @@ export const config = {
   ...configTemplate[configType],
 };
 
-console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
-console.log('config: ', config);
+// console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
+// console.log('config: ', config);

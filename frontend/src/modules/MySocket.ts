@@ -5,7 +5,7 @@ export class MySocket implements socketInterface {
   private _socket: WebSocket;
 
   constructor() {
-    const URL = config.url;
+    const URL = config.wsUrl;
 
     this._socket = new WebSocket(URL, 'echo-protocol');
 
@@ -17,7 +17,7 @@ export class MySocket implements socketInterface {
       const fromBackendStr = event.data;
       const fromBackendObj = JSON.parse(fromBackendStr);
       const msgFromBackendEvent = new CustomEvent(fromBackendObj.type, { detail: fromBackendObj });
-      
+
       window.dispatchEvent(msgFromBackendEvent);
     });
 
