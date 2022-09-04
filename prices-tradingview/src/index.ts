@@ -13,10 +13,6 @@ const main = async () => {
     await connection.close();
 
     console.log(`Candles for GAZPRUB:`, candles[0])
-
-    const unsubscribe = connection.subscribe(() => {
-      
-    });
 };
 
 main();
