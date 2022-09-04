@@ -1,6 +1,6 @@
 {
-  "newsTimeout": 1000,
-  "pricesTimeout": 1000,
+  "newsTimeout": 5000,
+  "pricesTimeout": 600000,
   "rss": {
     "gazprom": {
       "url": "https://gazprom.ru/rss",

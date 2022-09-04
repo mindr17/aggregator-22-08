@@ -15,7 +15,7 @@ module.exports = async (vendor, url, ticker) => {
       host: "localhost",
     });
 
-    let insertValues: string[] = [];
+    const insertValues: string[] = [];
 
     feed.items.forEach((item) => {
       insertValues.push(

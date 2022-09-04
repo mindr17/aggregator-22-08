@@ -1,7 +1,7 @@
 const { connect, getCandles } = require("tradingview-ws");
 const { Client } = require("pg");
 
-const saveInDb = async (data: any) => {
+const saveInDb = async (data: any[]) => {
   const client = new Client({
     user: "postgres",
     database: "aggregator",
@@ -9,15 +9,23 @@ const saveInDb = async (data: any) => {
     host: "localhost",
   });
 
+  const insertValues: string[] = [];
+
+  data.forEach((item) => {
+    insertValues.push(
+      `(TIMESTAMP '${item.date}', '${item.vendor}', '${item.ticker}', '${item.price}')`
+    );
+  });
+
   const merge = `
     INSERT INTO prices
     (date, vendor, ticker, price)
     VALUES
-    (TIMESTAMP WITH TIME ZONE '${data.date}', '${data.vendor}', '${data.ticker}', '${data.price}')
+    ${insertValues.join(",")}
     on conflict(date, ticker) do nothing;
     commit;`;
 
-  console.info(`About to merge ticker ${data.ticker}.`);
+  console.info(`About to merge ${insertValues.length} rows.`);
 
   client.connect();
   client.query(merge, (err, res) => {
@@ -46,17 +54,21 @@ module.exports = async (tickers) => {
       symbols: ticker,
     });
 
-    const candle = data[0][0];
+    const candles = data[0];
 
-    if (candle) {
-      const date = new Date(candle.timestamp * 1000);
+    if (candles) {
+      await saveInDb(
+        candles.map((candle) => {
+          const date = new Date(candle.timestamp * 1000);
 
-      await saveInDb({
-        date: date.toLocaleDateString() + " " + date.toLocaleTimeString(),
-        vendor,
-        ticker,
-        price: candle.close,
-      });
+          return {
+            date: date.toLocaleDateString() + " " + date.toLocaleTimeString(),
+            vendor,
+            ticker,
+            price: candle.close,
+          };
+        })
+      );
     }
 
     await connection.close();

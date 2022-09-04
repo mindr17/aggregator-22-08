@@ -40,8 +40,7 @@ const getVariable = async (name: any): Promise<any> => {
 };
 
 // News
-(async () => await setVariable("isNewsScrapingActive", false))();
-setInterval(async () => {
+const scrapNews = async () => {
   console.info("Attempt to start news scraping.");
 
   const isActive = (await getVariable("isNewsScrapingActive")) === "true";
@@ -67,11 +66,16 @@ setInterval(async () => {
   } else {
     console.info("Previous news scraping didn't finish.");
   }
-}, config.newsTimeout);
+};
+
+(async () => {
+  await setVariable("isNewsScrapingActive", false);
+  await scrapNews();
+})();
+setInterval(scrapNews, config.newsTimeout);
 
 // Prices
-(async () => await setVariable("isPricesScrapingActive", false))();
-setInterval(async () => {
+const scrapPrices = async () => {
   console.info("Attempt to start prices scraping.");
 
   const isActive = (await getVariable("isPricesScrapingActive")) === "true";
@@ -99,4 +103,10 @@ setInterval(async () => {
   } else {
     console.info("Previous prices scraping didn't finish.");
   }
-}, config.pricesTimeout);
+};
+
+(async () => {
+  await setVariable("isPricesScrapingActive", false);
+  await scrapPrices();
+})();
+setInterval(scrapPrices, config.pricesTimeout);
