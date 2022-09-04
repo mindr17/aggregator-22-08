@@ -1,8 +1,63 @@
+@import '../../../styles/variables.scss';
+
 .login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     font-size: 2rem;
+    color: $color-font-primary;
+    background-color: $color-bg-primary;
+    border: 0.1rem solid $color-font-primary;
+    border-radius: 0.5rem;
+    height: 40vh;
+    padding: 2rem;
 
     .loginForm {
         display: flex;
         flex-direction: column;
+        align-items: center;
+
+        .formField {
+            display: flex;
+            flex-direction: column;
+            margin: 1.5rem 0;
+
+            & input {
+                color: $color-font-primary;
+                background-color: $color-bg-secondary;
+                border: 0.1rem solid $color-font-primary;
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+.formBtn {
+    color: $color-font-primary;
+    background-color: $color-bg-primary;
+    border: 0.05rem solid $color-font-primary;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: $transition;
+
+    &:hover {
+        color: $color-font-secondary;
+        border-color: $color-font-secondary;
+        background-color: $color-bg-secondary;
+        cursor: pointer;
+    }
+}
+
+.span {
+    cursor: pointer;
+    transition: $transition;
+    color: $color-font-secondary;
+    border-bottom: 0.1rem solid $color-font-secondary;
+
+    &:hover {
+        color: blue;
+        border-color: blue;
     }
 }
