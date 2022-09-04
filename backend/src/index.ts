@@ -1,10 +1,11 @@
 import { startWsServer } from './servers/WSServer';
 import { startHttpServer } from './servers/httpServer';
+import { startAuthServer } from './auth/app';
 import { dbConnection } from './modules/dbConnection';
 import { myEmitter } from './modules/myEmitter';
 
 const main = async () => {
-  // const server = getHttpServer();
+  startAuthServer();
   startHttpServer();
   startWsServer();
   
