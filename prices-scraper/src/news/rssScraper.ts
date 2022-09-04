@@ -1,7 +1,7 @@
 const Parser = require("rss-parser");
 const { Client } = require("pg");
 
-module.exports = async (url, vendor) => {
+module.exports = async (vendor, url, ticker) => {
   console.info(`Start scraping vendor ${vendor}.`);
 
   const parser = new Parser();
@@ -15,29 +15,29 @@ module.exports = async (url, vendor) => {
       host: "localhost",
     });
 
-    let tempTableValues: string[] = [];
+    let insertValues: string[] = [];
 
     feed.items.forEach((item) => {
-      tempTableValues.push(
-        `(TIMESTAMP '${item.pubDate}', '${vendor}', '${item.title}', '${item.link}', '${item.content}')`
+      insertValues.push(
+        `(TIMESTAMP '${item.pubDate}', '${vendor}', '${ticker}', '${item.link}', '${item.title}', '${item.content}')`
       );
     });
 
     const merge = `
       INSERT INTO news
-      (date, vendor, title, url, text)
+      (date, vendor, ticker, url, title, text)
       VALUES
-      ${tempTableValues.join(",")}
-      on conflict(date, url) do nothing;
+      ${insertValues.join(",")}
+      on conflict(date, url, ticker) do nothing;
       commit;`;
 
-    console.info(`About to merge ${tempTableValues.length} rows.`);
+    console.info(`About to merge ${insertValues.length} rows.`);
 
     client.connect();
     client.query(merge, (err, res) => {
       if (err) {
         console.error(err.stack);
-      } else {
+      } else if (res[0].rowCount) {
         console.info(`Added ${res[0].rowCount} new rows.`);
       }
 

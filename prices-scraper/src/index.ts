@@ -1,6 +1,7 @@
 const Parser = require("rss-parser");
 const { Client } = require("pg");
 const rssScraper = require("./news/rssScraper");
+const tradingViewScraper = require("./prices/tradingViewScraper");
 const fs = require("fs");
 const path = require("node:path");
 const config = JSON.parse(
@@ -38,28 +39,64 @@ const getVariable = async (name: any): Promise<any> => {
   return res.rows[0].get_variable;
 };
 
-(async () => await setVariable("isWorking", false))();
-
+// News
+(async () => await setVariable("isNewsScrapingActive", false))();
 setInterval(async () => {
-  console.info("Attempt to start scraping.");
+  console.info("Attempt to start news scraping.");
 
-  const isWorking: boolean = (await getVariable("isWorking")) === "true";
+  const isActive = (await getVariable("isNewsScrapingActive")) === "true";
 
-  if (!isWorking) {
-    console.info("Start scraping");
+  if (!isActive) {
+    console.info("Start news scraping");
 
-    await setVariable("isWorking", true);
+    await setVariable("isNewsScrapingActive", true);
 
     // Get news from RSS
-    Object.entries(config.rss).forEach((x) => {
-      rssScraper(x[1], x[0]);
+    Object.entries(config.rss).forEach(async (x: [string, any]) => {
+      try {
+        await rssScraper(x[0], x[1].url, x[1].ticker);
+      } catch (e) {
+        console.error(`Error fetching data from ${x[1].url}`);
+      }
     });
 
     // Get news from other resources...
 
-    await setVariable("isWorking", false);
-    await setVariable("lastSyncDate", new Date());
+    await setVariable("isNewsScrapingActive", false);
+    await setVariable("newsScrapingLastSyncDate", new Date());
   } else {
-    console.info("Previous scraping didn't finish.");
+    console.info("Previous news scraping didn't finish.");
   }
-}, config.timeout);
+}, config.newsTimeout);
+
+// Prices
+(async () => await setVariable("isPricesScrapingActive", false))();
+setInterval(async () => {
+  console.info("Attempt to start prices scraping.");
+
+  const isActive = (await getVariable("isPricesScrapingActive")) === "true";
+
+  if (!isActive) {
+    console.info("Start prices scraping");
+
+    await setVariable("isPricesScrapingActive", true);
+
+    // Get prices from TradingView
+    try {
+      const tickers = Array.from(
+        new Set(Object.entries(config.rss).map((x: any) => x[1].ticker))
+      );
+
+      await tradingViewScraper(tickers);
+    } catch (e) {
+      console.error("Error fetching data from TradingView");
+    }
+
+    // Get prices from other resources...
+
+    await setVariable("isPricesScrapingActive", false);
+    await setVariable("pricesScrapingLastSyncDate", new Date());
+  } else {
+    console.info("Previous prices scraping didn't finish.");
+  }
+}, config.pricesTimeout);
