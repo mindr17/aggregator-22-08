@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx ts-node-dev --respawn --transpile-only ./src/index.ts",
-    "build": "esbuild ./src/index.ts --bundle --outfile=bundle.js --platform=node --format=esm"
+    "build": "esbuild ./src/index.ts --bundle --outfile=bundle.js --platform=node --format=esm --external:pg-native --external:tradingview-ws"
   },
   "license": "MIT",
   "dependencies": {
