@@ -30,7 +30,7 @@ export const startHttpServer = (): void => {
   }
 
   app.listen(port, () => {
-    console.log(`Fetch api listening at http://localhost:${port}`);
+    console.log(`Fetch api server at http://localhost:${port}`);
   });
 };
 

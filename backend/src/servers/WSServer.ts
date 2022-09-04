@@ -6,7 +6,7 @@ const BACK_PORT: string = process.env.BACK_PORT || '3030';
 
 export const startWsServer = (): void => {
   const wss = new WebSocketServer({ port: Number(BACK_PORT) });
-  console.log(`Hello! Websocket server has started on port ${BACK_PORT}!`);
+  console.log(`Websocket server started on port ${BACK_PORT}!`);
 
   wss.on('headers', (headers: string[]) => {
     console.log(headers);
