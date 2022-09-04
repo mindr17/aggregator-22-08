@@ -6,6 +6,7 @@ import useMessage from '../../hooks/message.hook';
 import styles from './Header.module.scss';
 import Navbar from './Navbar/Navbar';
 import ThemeToggle from './Navbar/ThemeToggle/ThemeToggle';
+import BurgerMenu from './BurgerMenu/BurgerMenu';
 
 const Header: React.FC = () => {
   const auth = useContext(AuthContext);
@@ -25,13 +26,34 @@ const Header: React.FC = () => {
     auth.toggleShowForm();
   };
 
+  const [burgerState, setBurgerState] = useState<boolean>(false);
+
+  const onBurgerMenuOpen = () => {
+    setBurgerState(!burgerState);
+  };
+
+  const addBurger = () => {
+    if (burgerState) {
+      return <BurgerMenu onClose={() => {setBurgerState(false)}} />
+    }
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        {addBurger()}
+        <a className={styles.burgerBtn} onClick={onBurgerMenuOpen}>
+          <div className={styles.burgerMenu}>
+            <div className={styles.burgerLine}></div>
+            <div className={styles.burgerLine}></div>
+            <div className={styles.burgerLine}></div>
+          </div>
+        </a>
         <h1 className={styles.logo} onClick={() => router.push('/')}>
-          <Image src='/img/icons8-financial-analytics-64.png' width={60} height={60} alt='logo' />
+          Aggregator
+          {/* <Image src='/img/icons8-financial-analytics-64.png' width={60} height={60} alt='logo' /> */}
         </h1>
-        {isAuthenticated && <Navbar />}
+        {<Navbar />}
         <div className={styles.rightGroup}>
           <div className={styles.authGroup}>
             {isAuthenticated ? (

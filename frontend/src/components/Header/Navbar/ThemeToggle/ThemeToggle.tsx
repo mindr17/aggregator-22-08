@@ -10,7 +10,7 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <input type='checkbox' id={styles['hide_checkbox']} defaultChecked={toggle} />
+      {/* <input type='checkbox' id={styles['hide_checkbox']} defaultChecked={toggle} />
       <label htmlFor='hide_checkbox' className={styles.toggle} onClick={handleLanguageToggle}>
         <span className={styles.toggle_button}>
           <span className={`${styles.crater} ${styles.crater_1}`}></span>
@@ -29,7 +29,7 @@ const ThemeToggle: React.FC = () => {
         <span className={`${styles.star} ${styles.star_6}`}></span>
         <span className={`${styles.star} ${styles.star_7}`}></span>
         <span className={`${styles.star} ${styles.star_8}`}></span>
-      </label>
+      </label> */}
     </div>
   );
 };

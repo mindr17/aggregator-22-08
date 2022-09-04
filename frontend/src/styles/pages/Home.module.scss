@@ -1,0 +1,12 @@
+@import '../variables.scss';
+
+.wrapper {
+    color: $color-font-primary;
+    font-size: $size-text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1.6rem;
+}
