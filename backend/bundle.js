@@ -29490,7 +29490,7 @@ var import_websocket_server = __toESM(require_websocket_server(), 1);
 var BACK_PORT = process.env.BACK_PORT || "3030";
 var startWsServer = () => {
   const wss = new import_websocket_server.default({ port: Number(BACK_PORT) });
-  console.log(`Hello! Websocket server has started on port ${BACK_PORT}!`);
+  console.log(`Websocket server started on port ${BACK_PORT}!`);
   wss.on("headers", (headers) => {
     console.log(headers);
   });
@@ -29622,7 +29622,7 @@ var startHttpServer = () => {
     console.error(err);
   }
   app.listen(port, () => {
-    console.log(`Fetch api listening at http://localhost:${port}`);
+    console.log(`Fetch api server at http://localhost:${port}`);
   });
 };
 

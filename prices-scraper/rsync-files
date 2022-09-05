@@ -1,2 +1,4 @@
-bundle.js
 package.json
+bundle.js
+src/
+config.json

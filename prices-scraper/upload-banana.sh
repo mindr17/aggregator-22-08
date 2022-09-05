@@ -1,6 +1,6 @@
 PROJECT_NAME="aggregator-scraper"
 HOST="banana"
-BACKEND_DIR="/root/aggregator/scraper"
+BACKEND_DIR="/root/aggregator/scraper/folder"
 
 echo "Building"
 npm run build
