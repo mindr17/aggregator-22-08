@@ -6,6 +6,7 @@
     "dev": "npx next dev",
     "build": "next build",
     "start": "next start",
+    "mytest": "npm run build && npm run start",
     "export": "next build && next export",
     "test": "jest",
     "lint": "next lint",

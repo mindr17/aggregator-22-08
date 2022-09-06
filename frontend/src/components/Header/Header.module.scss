@@ -9,15 +9,44 @@
   .container {
     margin: 0 auto;
     height: 40px;
-    padding: 0 2rem;
+    padding: 0 1rem;
     max-width: 180rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    
+    .mobileNav {
+      display: flex;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+
+    }
+
+    .desktopNav {
+      display: none;
+
+      @media (min-width: 768px) {
+        display: flex;
+      }
+
+    }
+
+    .burgerBtn {
+      display: flex;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+
+    }
 
     .logo {
       cursor: pointer;
       margin: 0;
+      font-size: 2.4rem;
     }
 
     .rightGroup {
@@ -75,16 +104,17 @@
 }
 
 .burgerMenu {
-  margin-top: 1px;
+  margin-top: 3px;
   width: 24px;
   margin-right: 10px;
   gap: 6px;
+  cursor: pointer;
 }
 
 .burgerLine {
-  height: 3px;
+  height: 2px;
   margin-bottom: 6px;
-  background: black;
+  background: white;
   transition: all .4s ease;
   z-index: 7;
 }

@@ -5,7 +5,7 @@ import { dbConnection } from './modules/dbConnection';
 // import { myEmitter } from './modules/myEmitter';
 
 const main = async () => {
-  // startAuthServer();
+  startAuthServer();
   startHttpServer();
   startWsServer();
   

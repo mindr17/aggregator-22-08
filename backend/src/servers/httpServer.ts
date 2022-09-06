@@ -6,7 +6,7 @@ import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
 import cors from "cors";
 
 export const startHttpServer = (): void => {
-  const port = '3031';
+  const port = process.env.PORT || '3031';
   const app = express();
 
   app.use(cors());

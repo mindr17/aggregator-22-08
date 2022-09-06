@@ -1,2 +1,5 @@
 bundle.js
 package.json
+routes/
+src/
+myConfig.ts
