@@ -11,7 +11,7 @@ const NewsList = (props: any) => {
       </div> */}
       <ul className={styles.newsList}>
         {messagesState.map((message: any) => {
-          return <ArticlePreview key={message.uid} message={message} />
+          return <ArticlePreview key={message.id} message={message} />
         })}
       </ul>
     </div>

@@ -6,26 +6,26 @@ import { MySocket } from '../../src/modules/MySocket';
 import Filters from '../../src/components/News/Filters/Filters';
 import NewsList from '../../src/components/News/NewsList/NewsList';
 
-const Home: NextPage = (props: any) => {
+const NewsPage: NextPage = (props: any) => {
   const [messagesState, setMessagesState] = useState([{ id: 0 }]);
 
   useEffect(() => {
     const fetchData = async (filters: any) => {
       const url: string = config.fetchUrl;
+      
+      const request = {
+        type: 'news',
+      };
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain',
         },
-        body: JSON.stringify({ filters: 'some filters' }),
+        body: JSON.stringify(request),
       });
 
       const news = await response.json();
-
-      news.forEach((item: any) => {
-        item.uid = Math.random();
-      });
 
       return news;
     };
@@ -62,4 +62,4 @@ const Home: NextPage = (props: any) => {
   );
 }
 
-export default Home;
+export default NewsPage;

@@ -20,7 +20,6 @@ class DbConnection {
         this._client.connect();
         
         this._client.query("SELECT * FROM get_news('2022-08-08 04:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
-        // console.log(err ? err.stack : res.rows);
 
         this._client.end();
 

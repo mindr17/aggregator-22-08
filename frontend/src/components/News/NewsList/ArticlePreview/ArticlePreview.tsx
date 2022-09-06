@@ -35,19 +35,17 @@ const ArticlePreview = (props: any) => {
     )
   };
 
-  console.log(message);
-
   return (
-    <Link href={'/'}>
+    <Link href={`/news/${message.id}`}>
       <a>
         <div className={styles.article}>
           {renderDate()}
           <div className={styles.ticker}>
             {message.ticker}
           </div>
-          <div className={styles.title}>
+          <p className={styles.title}>
             {message.title}
-          </div>
+          </p>
         </div>
       </a>
     </Link>
