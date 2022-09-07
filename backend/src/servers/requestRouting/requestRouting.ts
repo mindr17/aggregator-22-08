@@ -29,9 +29,12 @@ export const requestRouting: any = {
     const dateFrom = dateFromDate.toISOString();
     console.log('dateFrom: ', dateFrom);
 
-    const prices = await dbConnection.getPrices(ticker, dateFrom);
-    console.log('prices: ', prices);
+    try {
+      const prices = await dbConnection.getPrices(ticker, dateFrom);
+      
+      msg.prices = prices;
 
-    return [ 200, msg ];
+      return [ 200, msg ];
+    } catch(e) {console.log(e);};
   },
 };

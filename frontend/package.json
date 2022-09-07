@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/node": "^18.0.6",
-    "chart.js": "^3.9.1",
+    "chart.js": "^2.9.4",
     "formik": "^2.2.9",
     "next": "^12.2.2",
     "noop-ts": "^1.0.3",

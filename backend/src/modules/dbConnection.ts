@@ -31,28 +31,30 @@ class DbConnection {
   }
   
   async getPrices(ticker: string, dateFrom: string) {
-    const res = await new Promise(
-      (resolve) => {
-        this._client = new Client({
-          user: "postgres",
-          database: "aggregator",
-          password: "postgres",
-          host: "localhost",
-        });
-
-        this._client.connect();
-
-        const queryStr = `SELECT * FROM get_prices('${dateFrom}') WHERE ticker = '${ticker}';`;
-
-        this._client.query(queryStr, (err: { stack: any; }, res: { rows: any; }) => {
-
-        this._client.end();
-
-        resolve(res.rows);
-      })
-    });
-    
-    return res;
+    try {
+      const res = await new Promise(
+        (resolve) => {
+          this._client = new Client({
+            user: "postgres",
+            database: "aggregator",
+            password: "postgres",
+            host: "localhost",
+          });
+          
+          this._client.connect();
+  
+          const queryStr = `SELECT * FROM get_prices('${dateFrom}') WHERE ticker = '${ticker}';`;
+  
+          this._client.query(queryStr, (err: { stack: any; }, res: { rows: any; }) => {
+  
+          this._client.end();
+  
+          resolve(res.rows);
+        })
+      });
+      
+      return res;
+    } catch(e){console.error(e)};
   }
 
   async setVariable() {

@@ -1,3 +1,4 @@
+import CardLineChart from '../../Chart/CardLineChart';
 import styles from './Article.module.scss';
 
 const Article = (props: any) => {
@@ -6,6 +7,7 @@ const Article = (props: any) => {
   return (
     <>
       <div className={styles.text}>
+        <CardLineChart />
         <div>
           {message.ticker}
         </div>
