@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const config = require('config');
-
 
 router.post(
     '/register',

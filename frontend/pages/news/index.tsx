@@ -3,28 +3,30 @@ import { useEffect, useState } from 'react';
 import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
+import Filters from '../../src/components/News/Filters/Filters';
+import NewsList from '../../src/components/News/NewsList/NewsList';
 
-const Home: NextPage = (props: any) => {
-  const [messagesState, setMessagesState] = useState([{ uid: 'test' }]);
+const NewsPage: NextPage = (props: any) => {
+  const [messagesState, setMessagesState] = useState([{ id: 0 }]);
 
   useEffect(() => {
     const fetchData = async (filters: any) => {
       const url: string = config.fetchUrl;
+      
+      const request = {
+        type: 'news',
+        settings: '',
+      };
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json',
         },
-        // body: JSON.stringify(filters),
-        body: JSON.stringify({ filters: 'some filters' }),
+        body: JSON.stringify(request),
       });
 
       const news = await response.json();
-
-      news.forEach((item: any) => {
-        item.uid = Math.random();
-      });
 
       return news;
     };
@@ -55,13 +57,10 @@ const Home: NextPage = (props: any) => {
 
   return (
     <>
-      <div>
-        {messagesState.map((message: any) => {
-          return <div key={message.uid}>{JSON.stringify(message)}</div>;
-        })}
-      </div>
+      <Filters />
+      <NewsList messagesState={messagesState} />
     </>
   );
 }
 
-export default Home;
+export default NewsPage;

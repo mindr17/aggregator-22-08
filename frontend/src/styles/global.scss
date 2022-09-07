@@ -16,25 +16,36 @@ a {
 
 body {
   color: #FFFFFF;
-  background: #17181c;
+  background: #0C0E10;
   font-family: Roboto, Arial, sans-serif;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
   min-height: 100vh;
   overflow-y: scroll;
+  // display: flex;
+  width: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
 }
 
 header {
   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
   flex: 0 0 auto;
+  width: 100%;
 }
 
 main {
   /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
-  flex: 1 0 auto;
+  // flex: 1 0 auto;
+  display: flex;
+  width: 100%;
 }
 
 footer {
   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+  width: 100%;
   flex: 0 0 auto;
 }

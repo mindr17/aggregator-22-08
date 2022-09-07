@@ -1,12 +1,17 @@
 import 'dotenv/config';
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import { dbConnection } from '../modules/dbConnection';
 import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
+import { requestRouting } from './requestRouting/requestRouting';
+
 
 export const startHttpServer = (): void => {
-  const port = '3031';
+  const port = process.env.PORT || '3031';
   const app = express();
+
+  app.use(cors());
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -14,20 +19,25 @@ export const startHttpServer = (): void => {
   try {
     app.post('/', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
-
-      const body = res.body;
-      console.log('body: ', body);
-
-      const news = await dbConnection.getNews();
       
-      res.send(JSON.stringify(news));
+      const body = req.body;
+      console.log('body: ', body);
+      
+      const type: string = body.type;
+      const operation = requestRouting[type];
+      
+      // if (operation === undefined) throw new Error('This request type is not supported!')
+      
+      const [ statusCode, msg ]: [number, string] = await operation(body.settings);
+      
+      res.send(JSON.stringify(msg));
     });
   } catch(err) {
     console.error(err);
   }
 
   app.listen(port, () => {
-    console.log(`Fetch api listening at http://localhost:${port}`);
+    console.log(`Fetch api at http://localhost:${port}`);
   });
 };
 

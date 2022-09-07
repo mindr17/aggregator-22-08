@@ -6,14 +6,15 @@
     "dev": "npx next dev",
     "build": "next build",
     "start": "next start",
+    "mytest": "npm run build && npm run start",
     "export": "next build && next export",
     "test": "jest",
     "lint": "next lint",
     "lint:fix": "npm run lint -- --fix"
   },
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@types/node": "^18.0.6",
+    "chart.js": "^2.9.4",
     "formik": "^2.2.9",
     "next": "^12.2.2",
     "noop-ts": "^1.0.3",

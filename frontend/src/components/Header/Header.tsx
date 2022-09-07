@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 
   const [burgerState, setBurgerState] = useState<boolean>(false);
 
-  const onBurgerMenuOpen = () => {
+  const onBurgerMenuToggle = () => {
     setBurgerState(!burgerState);
   };
 
@@ -41,19 +41,20 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {addBurger()}
-        <a className={styles.burgerBtn} onClick={onBurgerMenuOpen}>
+        <a className={styles.burgerBtn} onClick={onBurgerMenuToggle}>
           <div className={styles.burgerMenu}>
             <div className={styles.burgerLine}></div>
             <div className={styles.burgerLine}></div>
             <div className={styles.burgerLine}></div>
           </div>
         </a>
+        {addBurger()}
         <h1 className={styles.logo} onClick={() => router.push('/')}>
           Aggregator
-          {/* <Image src='/img/icons8-financial-analytics-64.png' width={60} height={60} alt='logo' /> */}
         </h1>
-        {<Navbar />}
+        <div className={styles.desktopNav}>
+          <Navbar />
+        </div>
         <div className={styles.rightGroup}>
           <div className={styles.authGroup}>
             {isAuthenticated ? (
@@ -69,14 +70,14 @@ const Header: React.FC = () => {
               <button className={styles.btn} onClick={handleOnClick}>Login</button>
             )}
           </div>
-          <div className={styles.settings}>
+          {/* <div className={styles.settings}>
             <select className={styles.select}>
               <option value='en'>EN</option>
               <option value='ru'>RU</option>
               <option value='de'>DE</option>
             </select>
             <ThemeToggle />
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

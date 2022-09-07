@@ -14,19 +14,21 @@ const Navbar: React.FC = () => {
   const { pathname } = useRouter();
   const auth = useContext(AuthContext);
 
-  
-
   return (
     <nav className={styles.nav}>
-      {navigation.filter((item: { needAuth: any; }) => {
-        if (!auth.token && item.needAuth) return false;
+      {/* <ul className={styles.navList}> */}
+        {navigation.filter((item: { needAuth: any; }) => {
+          if (!auth.token && item.needAuth) return false;
 
-        return true;
-      }).map(({ id, title, path }) => (
-        <Link key={id} href={path}>
-          <a className={pathname === path ? styles.active : null}>{title}</a>
-        </Link>
-      ))}
+          return true;
+        }).map(({ id, title, path }) => (
+          // <li className={styles.navItem}>
+            <Link key={id} href={path}>
+              <a className={pathname === path ? styles.active : null}>{title}</a>
+            </Link>
+          // {/* </li> */}
+        ))}
+      {/* </ul> */}
     </nav>
   );
 };
