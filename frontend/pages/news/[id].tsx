@@ -5,60 +5,73 @@ import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
 import Filters from '../../src/components/News/Filters/Filters';
 import NewsList from '../../src/components/News/NewsList/NewsList';
+import Article from '../../src/components/News/Article/Article';
+import { useRouter } from 'next/router';
 
-const Home: NextPage = (props: any) => {
-  const [messagesState, setMessagesState] = useState([{ id: 0 }]);
+const ArticlePage: NextPage = (props: any) => {
+  const [articleState, setArticleState] = useState({});
 
-  useEffect(() => {
-    const fetchData = async (filters: any) => {
-      const url: string = config.fetchUrl;
+  const initialPrices = {
+    ticker: '',
+    candles: [],
+  };
 
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain',
-        },
-        body: JSON.stringify({ filters: 'some filters' }),
-      });
-
-      const news = await response.json();
-
-      news.forEach((item: any) => {
-        item.uid = Math.random();
-      });
-
-      return news;
+  const [pricesState, setPricesState] = useState({});
+  const router = useRouter();
+  
+  const fetchData = async (filters: any) => {
+    const url: string = config.fetchUrl;
+    
+    const request = {
+      type: 'article',
+      settings: {
+        id: Number(router.query.id),
+      },
     };
-
-    fetchData({}).then((news) => {
-      setMessagesState(news);
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
     });
-
-    const chatSocket: socketInterface = new MySocket();
-
-    const handleNewsEvent = (event: any) => {
-      setMessagesState((lastState) => {
-        const msg = event.detail.msg;
-        msg.uid = Math.random() * 100000;
-
-        return [msg, ...lastState];
+    
+    const news = await response.json();
+    
+    return news;
+  };
+  
+  useEffect(() => {
+    if (router.asPath !== router.route) {
+      fetchData({}).then((news) => {
+        setArticleState(news);
       });
     };
 
-    window.addEventListener('news', handleNewsEvent);
+      const chatSocket: socketInterface = new MySocket();
+
+      const handleNewsEvent = (event: any) => {
+        setArticleState((lastState: any) => {
+          const msg = event.detail.msg;
+          msg.uid = Math.random() * 100000;
+
+          return [msg, ...lastState];
+        });
+      };
+
+      window.addEventListener('news', handleNewsEvent);
 
     return () => {
       chatSocket.destroy();
 
       window.removeEventListener('news', handleNewsEvent);
     };
-  }, []);
+  }, [router]);
 
   return (
-    <>
-      <NewsList messagesState={messagesState} />
-    </>
+    <Article message={articleState} />
   );
 }
 
-export default Home;
+export default ArticlePage;

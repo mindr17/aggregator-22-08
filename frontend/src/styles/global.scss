@@ -22,7 +22,8 @@ body {
   // scroll-behavior: smooth;
   min-height: 100vh;
   overflow-y: scroll;
-  display: flex;
+  // display: flex;
+  width: 100%;
 }
 
 button {
@@ -33,6 +34,7 @@ button {
 header {
   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
   flex: 0 0 auto;
+  width: 100%;
 }
 
 main {
@@ -44,5 +46,6 @@ main {
 
 footer {
   /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+  width: 100%;
   flex: 0 0 auto;
 }

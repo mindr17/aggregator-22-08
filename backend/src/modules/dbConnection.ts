@@ -20,17 +20,17 @@ class DbConnection {
         this._client.connect();
         
         this._client.query("SELECT * FROM get_news('2022-08-08 04:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
+          
+          this._client.end();
 
-        this._client.end();
-
-        resolve(res.rows);
+          resolve(res.rows);
       })
     });
     
     return res;
   }
-
-  async getPrices() {
+  
+  async getPrices(ticker: string, dateFrom: string) {
     const res = await new Promise(
       (resolve) => {
         this._client = new Client({
@@ -42,8 +42,9 @@ class DbConnection {
 
         this._client.connect();
 
-        this._client.query("SELECT * FROM get_prices('2022-08-08 04:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
-        // console.log(err ? err.stack : res.rows);
+        const queryStr = `SELECT * FROM get_prices('${dateFrom}') WHERE ticker = '${ticker}';`;
+
+        this._client.query(queryStr, (err: { stack: any; }, res: { rows: any; }) => {
 
         this._client.end();
 
@@ -64,7 +65,9 @@ class DbConnection {
           host: "localhost",
         });
 
-        this._client.connect();        this._client.query("CALL set_variable('lastSyncDate', '2022-08-08 01:01:01');", (err: { stack: any; }, res: { rows: any; }) => {
+        this._client.connect();
+        
+        this._client.query("CALL set_variable('lastSyncDate', '2022-08-08 01:01:01');", (err: { stack: any; }, res: { rows: any; }) => {
         // console.log(err ? err.stack : res.rows);
 
         this._client.end();

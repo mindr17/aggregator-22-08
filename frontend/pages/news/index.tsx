@@ -15,12 +15,13 @@ const NewsPage: NextPage = (props: any) => {
       
       const request = {
         type: 'news',
+        settings: '',
       };
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(request),
       });
