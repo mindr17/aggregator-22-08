@@ -33,7 +33,7 @@ class DbConnection {
   async getPrices(ticker: string, dateFrom: string) {
     try {
       const res = await new Promise(
-        (resolve) => {
+        (resolve, reject) => {
           this._client = new Client({
             user: "postgres",
             database: "aggregator",
@@ -46,11 +46,14 @@ class DbConnection {
           const queryStr = `SELECT * FROM get_prices('${dateFrom}') WHERE ticker = '${ticker}';`;
   
           this._client.query(queryStr, (err: { stack: any; }, res: { rows: any; }) => {
-  
-          this._client.end();
-  
-          resolve(res.rows);
-        })
+            this._client.end();
+            try {
+              resolve(res.rows);
+            } catch(e) {
+              console.error(e)
+              reject('Prices query failed!');
+            };
+          });
       });
       
       return res;
