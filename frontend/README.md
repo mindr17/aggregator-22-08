@@ -1,17 +1,18 @@
-### Install Postgres database
-https://www.postgresql.org/download/
-```bash
-sudo -u postgres psql aggregator
-```
+### Install Postgres database, стандартный порт 5432
+Установка https://www.postgresql.org/download/
+Подключиться `sudo -u postgres psql aggregator`
+Смотреть порт, пути и тд `pg_lsclusters`
+Список баз данных `\l`
+Список таблиц `\dt`
 ### Start scrapers in dev mode
 ```bash
 cd prices-scraper && npm i && npm run dev
 ```
-### Start backend in dev mode
+### Start backend in dev mode, порты 3030, 3031, 5000
 ```bash
 cd backend && npm i && npm run dev
 ```
-### Start frontend in dev mode
+### Start frontend in dev mode, порт 3000
 ```bash
 cd frontend && npm i && npm run dev
 ```
@@ -41,7 +42,8 @@ esbuild - Сборка для деплоя
 dotenv - Возможность удобного использования различных настроек на локалке и деплое
 typescript - Типизация, компиляция
 ## Фронтенд
-Nextjs - Фреймворк поверх React, сборка, scss, роутинг, фронт сервер, выполнена частичная подготовка для серверного рендеринга
+Nextjs - Фреймворк поверх React, сборка, scss, роутинг, фронтенд сервер, выполнена частичная подготовка для серверного рендеринга
 chart.js - Графики
+react-toastify - Уведомления
 formik - Валидация форм
 eslint, prettier - Структурирование кода
