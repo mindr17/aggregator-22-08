@@ -1,9 +1,10 @@
 ### Install Postgres database, стандартный порт 5432
-Установка https://www.postgresql.org/download/
+Установка https://www.postgresql.org/download/  
 Смотреть порт, пути и тд `pg_lsclusters`  
 Подключиться `sudo -u postgres psql aggregator`  
 Список баз данных `\l`  
 Список таблиц `\dt`  
+Инструкция по созданию таблиц в db/ReadMe.txt  
 ### Start scrapers in dev mode
 ```bash
 cd prices-scraper && npm i && npm run dev
@@ -25,7 +26,7 @@ rss-parser - Обработка новостей
 fast-xml-parser - Обработка новостей  
 pg - Сохранение в бд  
 esbuild - Сборка для деплоя  
-dotenv - Возможность удобного использования различных настроек на локалке и деплое  
+dotenv - Переменные окружения
 typescript - Типизация, компиляция  
 ## Основной бекенд
 typescript - Частичная типизация, компиляция. Модуль авторизации написан на js, переписать не успели  
@@ -39,7 +40,7 @@ ts-node-dev - Livereload для ts
 nodemon - Livereload для js  
 mongoose - Работа с mongodb  
 esbuild - Сборка для деплоя  
-dotenv - Возможность удобного использования различных настроек на локалке и деплое  
+dotenv - Переменные окружения
 typescript - Типизация, компиляция  
 ## Фронтенд
 Nextjs - Фреймворк поверх React, сборка, scss, роутинг, фронтенд сервер, выполнена частичная подготовка для серверного рендеринга  
