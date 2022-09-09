@@ -31,7 +31,7 @@ function SignupForm({ handleShowLogin }) {
 
   const registerHandler = async () => {
     try {
-      const data = await request(`${config.authUrl}register`, 'POST', { ...form });
+      const data = await request(`${config.authUrl}api/auth/register`, 'POST', { ...form });
       message(data.message);
       clearForm();
     } catch (err) {
