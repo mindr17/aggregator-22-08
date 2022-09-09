@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('./models/User');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
@@ -20,8 +20,7 @@ router.post(
     ],
     async (req, res) => {
         try {
-
-            // console.log('body:', req.body);
+            console.log('body:', req.body);
 
             const errors = validationResult(req);
 
