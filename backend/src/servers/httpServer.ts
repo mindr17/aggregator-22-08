@@ -19,6 +19,9 @@ export const startHttpServer = (): void => {
   try {
     app.post('/', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
+
+      const query = req.query;
+      console.log('query: ', query);
       
       const body = req.body;
       console.log('body: ', body);
@@ -39,7 +42,7 @@ export const startHttpServer = (): void => {
     console.error(err);
   }
 
-  try {
+  try { 
     app.post('/test', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
       
@@ -63,55 +66,6 @@ export const startHttpServer = (): void => {
   }
 
   app.listen(port, () => {
-    console.log(`Fetch api at http://localhost:${port}`);
+    console.log(`Main api at port ${port}`);
   });
 };
-
-// export const startHttpServer = (): void => {
-//   try {
-//     const server = createServer(async (
-//       req: IncomingMessage, res: ServerResponse
-//     ): Promise<void> => {
-//       try {
-//         res.setHeader("Access-Control-Allow-Origin", "*");
-
-//         // const myResponse = await fetchHandler['getLastNews'];
-//         const news = await dbConnection.getNews();
-//         console.log('news: ', news);
-//         const myResponse = JSON.stringify(news);
-
-
-//         res.writeHead(200, { "Content-Type": "application/json" });
-//         res.end(myResponse);
-//       } catch(err) {
-//         console.error(err);
-//       }
-//     });
-    
-//     const PORT: string = process.env.PORT || '3031';
-
-//     server.listen(PORT, () => console.log(`Http server listening on port ${PORT}`));
-//   } catch(err) {
-//     console.error(`Error in http server!\n${err}`);
-//   }
-// };
-
-// export const getHttpServer = () => {
-//   try {
-//     const server = createServer(async (
-//       req: IncomingMessage, res: ServerResponse
-//     ): Promise<void> => {
-//       try {
-//         const res = await fetchHandler['getLastNews'];
-//       } catch(err) {
-//         console.error(err);
-//       }
-//     });
-    
-//     const PORT: string = '3031';
-  
-//     return server;    
-//   } catch(err) {
-//     console.error(`Error in http server!\n${err}`)
-//   }
-// };

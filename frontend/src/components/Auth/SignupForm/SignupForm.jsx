@@ -9,8 +9,8 @@ function SignupForm({ handleShowLogin }) {
   const message = useMessage();
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: 'default@test.com',
+    password: '123456Aa',
   });
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function SignupForm({ handleShowLogin }) {
 
   const registerHandler = async () => {
     try {
-      const data = await request(`${config.authUrl}/register`, 'POST', { ...form });
+      const data = await request(`${config.authUrl}register`, 'POST', { ...form });
       message(data.message);
       clearForm();
     } catch (err) {

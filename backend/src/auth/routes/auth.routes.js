@@ -41,7 +41,6 @@ router.post(
             const hashedPass = await bcrypt.hash(password, saltRounds);
             const user = new User({ email, password: hashedPass });
 
-
             // console.log('hashedPass:', hashedPass);           
 
             await user.save();

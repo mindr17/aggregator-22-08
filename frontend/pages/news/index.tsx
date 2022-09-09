@@ -9,28 +9,28 @@ import NewsList from '../../src/components/News/NewsList/NewsList';
 const NewsPage: NextPage = (props: any) => {
   const [messagesState, setMessagesState] = useState([{ id: 0 }]);
 
-  useEffect(() => {
-    const fetchData = async (filters: any) => {
-      const url: string = config.fetchUrl;
-      
-      const request = {
-        type: 'news',
-        settings: '',
-      };
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(request),
-      });
-
-      const news = await response.json();
-
-      return news;
+  const fetchData = async (settings: any) => {
+    const url: string = config.fetchUrl;
+    
+    const request = {
+      type: 'news',
+      settings: settings,
     };
 
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
+    });
+
+    const news = await response.json();
+
+    return news;
+  };
+
+  useEffect(() => {
     fetchData({}).then((news) => {
       setMessagesState(news);
     });
