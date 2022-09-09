@@ -68,11 +68,11 @@ const scrapNews = async () => {
   }
 };
 
-(async () => {
-  await setVariable("isNewsScrapingActive", false);
-  await scrapNews();
-})();
-setInterval(scrapNews, config.newsTimeout);
+// (async () => {
+//   await setVariable("isNewsScrapingActive", false);
+//   await scrapNews();
+// })();
+// setInterval(scrapNews, config.newsTimeout);
 
 // Prices
 const scrapPrices = async () => {
