@@ -2,6 +2,7 @@ import styles from './SignupForm.module.scss';
 import React, { useEffect, useState } from 'react';
 import useHttp from '../../../hooks/http.hook';
 import useMessage from '../../../hooks/message.hook';
+import { config } from '../../../config';
 
 function SignupForm({ handleShowLogin }) {
   const { load, error, request, clearError } = useHttp();
@@ -30,7 +31,7 @@ function SignupForm({ handleShowLogin }) {
 
   const registerHandler = async () => {
     try {
-      const data = await request('http://localhost:5000/api/auth/register', 'POST', { ...form });
+      const data = await request(`${config.authUrl}/register`, 'POST', { ...form });
       message(data.message);
       clearForm();
     } catch (err) {

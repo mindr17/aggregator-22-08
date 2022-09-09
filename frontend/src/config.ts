@@ -1,3 +1,5 @@
+const alwaysUseProd = true;
+
 const configTemplate = {
   "baseConfig": {
     port: 3030,
@@ -9,14 +11,20 @@ const configTemplate = {
   },
   "prodConfig": {
     authUrl: 'https://bananasite.ru/api/aggregator/auth',
-    fetchUrl: 'https://bananasite.ru/api/aggregator/fetch',
+    fetchUrl: 'https://bananasite.ru/api/aggregator/fetch/test',
     wsUrl: 'wss://bananasite.ru/api/aggregator/ws',
   },
 };
 
-const configType = (process.env.NODE_ENV === 'development')
-  ? 'devConfig'
-  : 'prodConfig';
+const getConfigType = () => {
+  if (alwaysUseProd) return 'prodConfig';
+
+  return (process.env.NODE_ENV === 'development')
+    ? 'devConfig'
+    : 'prodConfig';
+};
+
+const configType = getConfigType();
 
 export const config = {
   ...configTemplate['baseConfig'],
