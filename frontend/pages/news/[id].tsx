@@ -60,12 +60,12 @@ const ArticlePage: NextPage = (props: any) => {
         });
       };
 
-      window.addEventListener('news', handleNewsEvent);
+      // window.addEventListener('news', handleNewsEvent);
 
     return () => {
       chatSocket.destroy();
 
-      window.removeEventListener('news', handleNewsEvent);
+      // window.removeEventListener('news', handleNewsEvent);
     };
   }, [router]);
 
