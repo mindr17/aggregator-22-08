@@ -17,6 +17,7 @@ const main = async () => {
   startAuthServer();
   startHttpServer();
   startWsServer();
+  startRabbitMQClient();
   
   // const sendToFront = async () => {
   //   const news = await dbConnection.getNews();

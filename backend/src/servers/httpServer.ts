@@ -6,7 +6,6 @@ import { dbConnection } from '../modules/dbConnection';
 import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
 import { requestRouting } from './requestRouting/requestRouting';
 
-
 export const startHttpServer = (): void => {
   const port = process.env.PORT || '3031';
   const app = express();
@@ -20,9 +19,6 @@ export const startHttpServer = (): void => {
     app.post('/', async (req: any, res: any) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
 
-      const query = req.query;
-      console.log('query: ', query);
-      
       const body = req.body;
       console.log('body: ', body);
       

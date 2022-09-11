@@ -1,0 +1,2 @@
+- move rabbitmq code to es6, add types
+- change WSServer architecture

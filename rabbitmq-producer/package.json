@@ -1,0 +1,22 @@
+{
+  "name": "aggregator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "build": "esbuild ./src/index.ts --bundle --outfile=bundle.js --platform=node --format=esm --external:pg-native --external:aws-sdk --external:mock-aws-s3 --external:nock",
+    "mytest": "npm run build && node bundle.js",
+    "start": "node ./src/auth/app.js",
+    "server": "nodemon ./src/auth/app.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.0.1",
+    "esbuild": "^0.14.48",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.13"
+  }
+}

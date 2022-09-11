@@ -19,8 +19,9 @@ class DbConnection {
 
         this._client.connect();
         
-        this._client.query("SELECT * FROM get_news('2022-09-09 16:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
+        // this._client.query("SELECT * FROM get_news('2022-09-09 16:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
         // this._client.query("SELECT * FROM get_news('2022-09-09 19:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
+        this._client.query("SELECT * FROM get_news('2022-08-09 19:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
           
         this._client.end();
 

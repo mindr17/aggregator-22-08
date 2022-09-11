@@ -41,41 +41,43 @@ const NewsPage: NextPage = (props: any) => {
   const initialMessagesState = props.news;
   const [messagesState, setMessagesState] = useState(initialMessagesState);
 
+  useEffect(() => {
+    fetchData({}).then((news) => {
+      console.log('news: ', news);
+      setMessagesState(news);
+    });
+
+    const chatSocket: socketInterface = new MySocket();
+
+    const handleNewsEvent = (event: any) => {
+      setMessagesState((lastState: any) => {
+        const msg = event.detail.msg;
+        console.log('msg: ', msg);
+        msg.uid = Math.random() * 100000;
+
+        return [msg, ...lastState];
+      });
+    };
+
+    window.addEventListener('news', handleNewsEvent);
+
+    return () => {
+      chatSocket.destroy();
+
+      window.removeEventListener('news', handleNewsEvent);
+    };
+  }, []);
 
   return (
     <>
       <Filters />
       {/* <NewsList messagesState={messagesState} /> */}
       <SWRConfig value={ props.fallback }>
-        <NewsList messagesState={props.news} />
+        {/* <NewsList messagesState={props.news} /> */}
+        <NewsList messagesState={messagesState} />
       </SWRConfig>
     </>
   );
 }
 
 export default NewsPage;
-
-// useEffect(() => {
-  // fetchData({}).then((news) => {
-  //   setMessagesState(news);
-  // });
-
-    // const chatSocket: socketInterface = new MySocket();
-
-    // const handleNewsEvent = (event: any) => {
-    //   setMessagesState((lastState: any) => {
-    //     const msg = event.detail.msg;
-    //     msg.uid = Math.random() * 100000;
-
-    //     return [msg, ...lastState];
-    //   });
-    // };
-
-    // window.addEventListener('news', handleNewsEvent);
-
-    // return () => {
-    //   chatSocket.destroy();
-
-    //   window.removeEventListener('news', handleNewsEvent);
-    // };
-  // }, []);
