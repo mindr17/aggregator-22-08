@@ -4,7 +4,9 @@
 Подключиться `sudo -u postgres psql aggregator`  
 Список баз данных `\l`  
 Список таблиц `\dt`  
-Инструкция по созданию таблиц в db/ReadMe.txt  
+Инструкция по созданию таблиц в db/ReadMe.txt 
+### Install RabbitMQ
+https://www.rabbitmq.com/install-debian.html#apt-quick-start-cloudsmith
 ### Start scrapers in dev mode
 ```bash
 cd prices-scraper && npm i && npm run dev
@@ -27,6 +29,7 @@ pg - Сохранение в бд
 esbuild - Сборка для деплоя  
 dotenv - Переменные окружения  
 typescript - Типизация, компиляция  
+amqplib - RabbitMQ
 ## Основной бекенд
 typescript - Частичная типизация, компиляция. Модуль авторизации написан на js, переписать не успели  
 body-parser - Middleware для обработки тела запроса к бекенду, преобразование из json в объект  
@@ -57,5 +60,18 @@ swr - Stale While Revalidate - Рендеринг даты при SSG
 - Чтобы работали подпапки для api, достаточно добавить в конце пути прямой слеш  
 - Серверный рендеринг поднял Google Page Speed на мобильном устройстве до 99 из 100
 - Даты при SSG нужно оборачивать в swr  
-- Билдить нужно на продакшене, иначе апи не будет работать, да и в случае с большим количеством динамиечских страниц  
 - Стало в 2 раза больше знаний по деплою)
+- Для билда на продакшене 1гб оперативы недостаточно  
+- Научились использовать переменные окружения для фронта
+
+```bash
+npm run build
+
+> name@1.0.0 build
+> next build
+
+info  - SWC minify release candidate enabled. https://nextjs.link/swcmin
+info  - Skipping validation of types
+info  - Skipping linting
+info  - Creating an optimized production build ..Killed
+```

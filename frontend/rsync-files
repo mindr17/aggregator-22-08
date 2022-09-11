@@ -1,6 +1,7 @@
+.next/
 src/
 pages/
 public/
-declaration.d.ts
 next.config.js
 package.json
+.env.local
