@@ -1,4 +1,4 @@
-const alwaysUseProd = false;
+const alwaysUseProdBackend = true;
 
 const configTemplate = {
   "baseConfig": {
@@ -17,7 +17,7 @@ const configTemplate = {
 };
 
 const getConfigType = () => {
-  if (alwaysUseProd) return 'prodConfig';
+  if (alwaysUseProdBackend) return 'prodConfig';
 
   return (process.env.NODE_ENV === 'development')
     ? 'devConfig'

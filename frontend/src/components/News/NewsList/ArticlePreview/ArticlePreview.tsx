@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import useSWR from 'swr';
 import styles from './ArticlePreview.module.scss';
 
 const ArticlePreview = (props: any) => {
@@ -35,11 +36,13 @@ const ArticlePreview = (props: any) => {
     )
   };
 
+  const { data } = useSWR('timeSincePostSave', renderDate)
+
   return (
     <Link href={`/news/${message.id}`}>
       <a>
         <div className={styles.article}>
-          {renderDate()}
+          <div>{ data }</div>
           <div className={styles.ticker}>
             {message.ticker}
           </div>
