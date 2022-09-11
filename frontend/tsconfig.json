@@ -33,7 +33,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/components/News"  ],
+, "src/components/News", "pages/api/revalidate.js"  ],
   "exclude": [
     "node_modules"
   ]
