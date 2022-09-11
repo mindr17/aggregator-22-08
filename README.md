@@ -7,7 +7,11 @@
 Инструкция по созданию таблиц в db/ReadMe.txt 
 ### Install RabbitMQ
 https://www.rabbitmq.com/install-debian.html#apt-quick-start-cloudsmith
-### Start scrapers in dev mode
+### Start RabbitMQ producer
+```bash
+cd rabbitmq-producer && npm i && npm run dev
+```
+### Start news and prices scrapers in dev mode
 ```bash
 cd prices-scraper && npm i && npm run dev
 ```

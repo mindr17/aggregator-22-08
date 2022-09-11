@@ -16,7 +16,6 @@ export class MySocket implements socketInterface {
     this._socket.onmessage = ((event: { data: string; }) => {
       const fromBackendStr = event.data;
       const fromBackendObj = JSON.parse(fromBackendStr);
-      console.log('fromBackendObj: ', fromBackendObj);
       const msgFromBackendEvent = new CustomEvent(fromBackendObj.type, { detail: fromBackendObj });
 
       window.dispatchEvent(msgFromBackendEvent);

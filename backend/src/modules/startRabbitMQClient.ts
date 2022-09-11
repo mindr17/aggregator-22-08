@@ -1,3 +1,4 @@
+import { myEmitter } from '../modules/myEmitter';
 var amqp = require('amqplib/callback_api');
 
 export const startRabbitMQClient = () => {
@@ -20,7 +21,9 @@ export const startRabbitMQClient = () => {
       channel.consume(
         queue,
         function(msg: any) {
-          console.log(" [x] Received %s", msg.content.toString());
+          // console.log(" [x] Received %s", msg.content.toString());
+
+          myEmitter.emit('news', msg.content.toString());
         },
         {
           noAck: true

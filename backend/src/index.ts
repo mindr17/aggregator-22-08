@@ -1,6 +1,7 @@
 import { startWsServer } from './servers/WSServer';
 import { startHttpServer } from './servers/httpServer';
 import { startAuthServer } from './auth/app';
+import { startRabbitMQClient } from './modules/startRabbitMQClient';
 import { dbConnection } from './modules/dbConnection';
 // import { myEmitter } from './modules/myEmitter';
 

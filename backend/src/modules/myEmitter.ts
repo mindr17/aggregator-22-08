@@ -1,3 +1,3 @@
-// import events from 'events';
+const events = require('events');
 
-// export const myEmitter = new events.EventEmitter();
+export const myEmitter = new events.EventEmitter();

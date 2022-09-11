@@ -42,17 +42,15 @@ const NewsPage: NextPage = (props: any) => {
   const [messagesState, setMessagesState] = useState(initialMessagesState);
 
   useEffect(() => {
-    fetchData({}).then((news) => {
-      console.log('news: ', news);
-      setMessagesState(news);
-    });
+    // fetchData({}).then((news) => {
+    //   setMessagesState(news);
+    // });
 
     const chatSocket: socketInterface = new MySocket();
 
     const handleNewsEvent = (event: any) => {
       setMessagesState((lastState: any) => {
         const msg = event.detail.msg;
-        console.log('msg: ', msg);
         msg.uid = Math.random() * 100000;
 
         return [msg, ...lastState];
