@@ -8,30 +8,45 @@ class DbConnection {
   }
 
   async getNews() {
-    const res = await new Promise(
-      (resolve) => {
-        this._client = new Client({
-          user: "postgres",
-          database: "aggregator",
-          password: "postgres",
-          host: "localhost",
-        });
+    try {
+      const res = await new Promise(
+        (resolve, reject) => {
+          this._client = new Client({
+            user: "postgres",
+            database: "aggregator",
+            password: "postgres",
+            host: "localhost",
+          });
 
-        this._client.connect();
-        
-        // this._client.query("SELECT * FROM get_news('2022-09-09 16:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
-        this._client.query("SELECT * FROM get_news('2022-09-09 19:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
-        // this._client.query("SELECT * FROM get_news('2022-08-09 19:05:06');", (err: { stack: any; }, res: { rows: any; }) => {
+          this._client.connect();
           
-        this._client.end();
+          const searchQuery = `
+            SELECT *
+            FROM get_news('2022-08-09 19:05:06');
+          `;
 
-        resolve(res.rows);
-      })
-    });
-    
-    return res;
+          const searchQuery2 = `
+            SELECT *
+            FROM get_news('2022-08-09 19:05:06')
+            WHERE to_tsvector(title) @@ to_tsquery('для');
+          `;
+            // WHERE Contains(text, '"*мечта*"') > 0;
+            
+          this._client.query(searchQuery2, (err: { stack: any; }, res: { rows: any; }) => {
+            if (err) reject();
+            if (!res) reject();
+
+            this._client.end();
+
+            resolve(res.rows);
+          });
+        }
+      );
+
+      return res;
+    } catch(e) {console.error(e)};
   }
-  
+
   async getPrices(ticker: string, dateFrom: string) {
     try {
       const res = await new Promise(
@@ -45,7 +60,11 @@ class DbConnection {
           
           this._client.connect();
   
-          const queryStr = `SELECT * FROM get_prices('${dateFrom}') WHERE ticker = '${ticker}';`;
+          const queryStr = `
+            SELECT *
+            FROM get_prices('${dateFrom}')
+            WHERE ticker = '${ticker}';
+          `;
   
           this._client.query(queryStr, (err: { stack: any; }, res: { rows: any; }) => {
             this._client.end();

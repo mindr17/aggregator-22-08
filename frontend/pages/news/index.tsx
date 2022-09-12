@@ -40,8 +40,21 @@ export async function getStaticProps() {
 const NewsPage: NextPage = (props: any) => {
   const initialMessagesState = props.news;
   const [messagesState, setMessagesState] = useState(initialMessagesState);
+  const [settingsState, setSettingsState] = useState({});
+
+  const updateUri = () => {
+
+  };
+
+  // const update = async (settings: any) => {
+  //   const res = await fetchData({});
+  //   const newsData = await res.json();
+  //   setMessagesState(newsData);
+  // };
 
   useEffect(() => {
+    // settingsState = 
+
     // fetchData({}).then((news) => {
     //   setMessagesState(news);
     // });
@@ -69,9 +82,8 @@ const NewsPage: NextPage = (props: any) => {
   return (
     <>
       <SettingsPanel onSetMessagesState={setMessagesState}/>
-      {/* <NewsList messagesState={messagesState} /> */}
       <SWRConfig value={ props.fallback }>
-        {/* <NewsList messagesState={props.news} /> */}
+        {/* <NewsList messagesState={messagesState} update={update}/> */}
         <NewsList messagesState={messagesState} />
       </SWRConfig>
     </>

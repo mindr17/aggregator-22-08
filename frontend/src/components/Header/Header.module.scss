@@ -113,12 +113,14 @@
   margin-right: 10px;
   gap: 6px;
   cursor: pointer;
+
+  .burgerLine {
+    height: 2px;
+    margin-bottom: 6px;
+    background: white;
+    transition: all .4s ease;
+    z-index: 7;
+  }
+  
 }
 
-.burgerLine {
-  height: 2px;
-  margin-bottom: 6px;
-  background: white;
-  transition: all .4s ease;
-  z-index: 7;
-}

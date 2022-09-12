@@ -22,7 +22,7 @@ const main = async () => {
           type: 'news',
           msg: {
             id: new Date(),
-            date: '2022-09-08T12:57:15.000Z',
+            date: new Date(),
             vendor: 'prime',
             ticker: 'ROSN',
             url: 'https://1prime.ru/industry_and_energy/20220908/838055637.html',

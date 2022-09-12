@@ -15,9 +15,13 @@ const SettingsPanel = (props: any) => {
     }
   };
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
-    console.log('handleSubmit');
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
+    
+    console.log('handleSubmit');
+    
+    // const await props.fetchData({});
+
     const msg = {
       id: new Date(),
       date: '2022-09-08T12:57:15.000Z',
@@ -36,7 +40,6 @@ const SettingsPanel = (props: any) => {
       <div className={styles.searchPanel}>
         <form className={styles.searchBox} onSubmit={handleSubmit}>
           <input className={styles.searchField} placeholder="Search for...">
-
           </input>
         </form>
       </div>

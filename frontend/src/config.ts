@@ -1,5 +1,5 @@
-const alwaysUseProdBackend = true;
-// const alwaysUseProdBackend = false;
+// const alwaysUseProdBackend = true;
+const alwaysUseProdBackend = false;
 
 const configTemplate = {
   "baseConfig": {
