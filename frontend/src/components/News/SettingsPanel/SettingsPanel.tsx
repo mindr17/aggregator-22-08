@@ -29,7 +29,7 @@ const SettingsPanel = (props: any) => {
     };
     props.onSetMessagesState([msg]);
   }
-  
+
   return (
     <>
       { addFiltersMenu() }

@@ -15,6 +15,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    position: relative;
     
     .mobileNav {
       display: flex;
@@ -26,10 +27,13 @@
     }
 
     .desktopNav {
+      position: absolute;
       display: none;
-
+      
       @media (min-width: 768px) {
         display: flex;
+        width: 100%;
+        justify-content: center;
       }
 
     }
