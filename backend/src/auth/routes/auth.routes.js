@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const { myConfig } = require('../../../myConfig');
 
 router.post(
     '/register',
@@ -85,7 +86,7 @@ router.post(
 
             const token = jwt.sign(
                 { userId: user.id },
-                config.get('jwtSecretKey'),
+                myConfig.jwtSecretKey,
                 { expiresIn: '24h' }
             );
 

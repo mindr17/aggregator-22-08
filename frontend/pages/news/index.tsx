@@ -46,14 +46,16 @@ const NewsPage: NextPage = (props: any) => {
 
   };
 
-  // const update = async (settings: any) => {
-  //   const res = await fetchData({});
-  //   const newsData = await res.json();
-  //   setMessagesState(newsData);
-  // };
+  const update = async (settings: any) => {
+    const res = await fetchData({});
+    const newsData = await res.json();
+    setMessagesState(newsData);
+  };
 
   useEffect(() => {
-    // settingsState = 
+    // const initialSettings = 
+    
+    // setSettingsState(initialSettings);
 
     // fetchData({}).then((news) => {
     //   setMessagesState(news);
