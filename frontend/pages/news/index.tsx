@@ -6,6 +6,7 @@ import { MySocket } from '../../src/modules/MySocket';
 import SettingsPanel from '../../src/components/News/SettingsPanel/SettingsPanel';
 import NewsList from '../../src/components/News/NewsList/NewsList';
 import { SWRConfig } from 'swr';
+import { useRouter } from "next/router";
 
 const fetchData = async (settings: any) => {
   const requestBody = {
@@ -40,6 +41,7 @@ export async function getStaticProps() {
 const NewsPage: NextPage = (props: any) => {
   const initialMessagesState = props.news;
   const [messagesState, setMessagesState] = useState(initialMessagesState);
+  const router = useRouter();
   const [settingsState, setSettingsState] = useState({});
 
   const updateUri = () => {
@@ -47,15 +49,20 @@ const NewsPage: NextPage = (props: any) => {
   };
 
   const update = async (settings: any) => {
+    // if (JSON.stringify(settings) === JSON.stringify(settingsState)) return;
+
+    // setSettingsState()
+
+    // router.query = 
+
     const res = await fetchData({});
     const newsData = await res.json();
     setMessagesState(newsData);
   };
 
   useEffect(() => {
-    // const initialSettings = 
-    
-    // setSettingsState(initialSettings);
+    const initialSettings = router.query;
+    setSettingsState(initialSettings);
 
     // fetchData({}).then((news) => {
     //   setMessagesState(news);
