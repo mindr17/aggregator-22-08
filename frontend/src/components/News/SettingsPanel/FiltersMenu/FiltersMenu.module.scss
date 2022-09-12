@@ -1,0 +1,86 @@
+.filtersMenuContainer {
+  position: fixed;
+  background-color: black;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: 10px;
+
+  .filtersMenuHeader {
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+
+    .closeBtn {
+      font-size: 2rem;
+      width: 24px;
+      margin-top: 8px;
+      cursor: pointer;
+
+      .closeLine {
+        height: 2px;
+        margin-bottom: 11px;
+        background-color: #fff;
+      }
+      
+      .closeLine:first-child {
+        transform: rotate(45deg) translate(9px, 9px);
+      }
+      
+      .closeLine:nth-child(2) {
+        transform: rotate(-45deg);
+      }
+
+    }
+
+  }
+
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+  
+    .menu__item {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      padding: 20px;
+      cursor: pointer;
+      
+      &:hover {
+        background-color: red;
+      }
+    
+      .menuLink {
+        justify-content: center;
+        display: flex;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+      }
+    
+    }
+  
+  }
+
+  .applyBtn {
+    font-size: 4rem;
+    position: fixed;
+    display: flex;
+    bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #3C404D;
+
+    &:hover {
+      background-color: grey;
+      cursor: pointer;
+    }
+  }
+}

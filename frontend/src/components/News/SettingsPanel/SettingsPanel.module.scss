@@ -1,0 +1,54 @@
+.settingsPanel {
+  min-height: 42px;
+  background-color: #fff;
+  background-color: #1A1C21;
+  width: 100%;
+  display: flex;
+  font-size: 2rem;
+  
+  .settingsLeft {
+    display: flex;
+    width: 100%;
+    padding: 6px;
+    
+    .sortBtn {
+      display: flex;
+      background-color: #3C404D;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    
+  }
+  
+  .settingsCenter {
+    display: flex;
+    width: 100%;
+  }
+  
+  .settingsRight {
+    display: flex;
+    padding: 6px;
+    width: 100%;
+    
+    .filtersBtn {
+      display: flex;
+      background-color: #3C404D;
+      width: 100%;
+      border-radius: 6px;
+      color: #717581;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      
+      &:hover {
+        background-color: grey;
+        color: white;
+      }
+    }
+    
+  }
+  
+}

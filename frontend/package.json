@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@swc/core": "^1.2.208",
+    "@types/chart.js": "^2.9.37",
     "@types/jest": "^28.1.5",
     "@types/react": "^18.0.15",
     "@types/webpack-env": "^1.16.3",

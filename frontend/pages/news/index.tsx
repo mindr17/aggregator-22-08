@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
-import Filters from '../../src/components/News/Filters/Filters';
+import SettingsPanel from '../../src/components/News/SettingsPanel/SettingsPanel';
 import NewsList from '../../src/components/News/NewsList/NewsList';
 import { SWRConfig } from 'swr';
 
@@ -68,7 +68,7 @@ const NewsPage: NextPage = (props: any) => {
 
   return (
     <>
-      <Filters />
+      <SettingsPanel />
       {/* <NewsList messagesState={messagesState} /> */}
       <SWRConfig value={ props.fallback }>
         {/* <NewsList messagesState={props.news} /> */}

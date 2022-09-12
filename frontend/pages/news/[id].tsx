@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
-import Filters from '../../src/components/News/Filters/Filters';
+import Filters from '../../src/components/News/SettingsPanel/SettingsPanel';
 import NewsList from '../../src/components/News/NewsList/NewsList';
 import Article from '../../src/components/News/Article/Article';
 import { useRouter } from 'next/router';
