@@ -14,11 +14,32 @@ const SettingsPanel = (props: any) => {
       return <FiltersMenu onClose={() => {setBurgerState(false)}} />
     }
   };
+
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
+    console.log('handleSubmit');
+    event.preventDefault();
+    const msg = {
+      id: new Date(),
+      date: '2022-09-08T12:57:15.000Z',
+      vendor: 'prime',
+      ticker: 'ROSN',
+      url: 'https://1prime.ru/industry_and_energy/20220908/838055637.html',
+      title: `Test from search`,
+      text: 'Металлургический завод на Сицилии остановился из-за дороговизны энергии',
+    };
+    props.onSetMessagesState([msg]);
+  }
   
   return (
     <>
-      {/* { addSortMenu } */}
       { addFiltersMenu() }
+      <div className={styles.searchPanel}>
+        <form className={styles.searchBox} onSubmit={handleSubmit}>
+          <input className={styles.searchField} placeholder="Search for...">
+
+          </input>
+        </form>
+      </div>
       <div className={styles.settingsPanel}>
         <div className={styles.settingsLeft}>
           {/* <div className={styles.sortBtn}>

@@ -68,7 +68,7 @@ const NewsPage: NextPage = (props: any) => {
 
   return (
     <>
-      <SettingsPanel />
+      <SettingsPanel onSetMessagesState={setMessagesState}/>
       {/* <NewsList messagesState={messagesState} /> */}
       <SWRConfig value={ props.fallback }>
         {/* <NewsList messagesState={props.news} /> */}
