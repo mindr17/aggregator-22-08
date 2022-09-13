@@ -31,6 +31,7 @@ export const startHttpServer = (): void => {
       }
       
       const [ statusCode, msg ]: [number, string] = await operation(body.settings);
+      console.log('msg.length: ', msg.length);
       
       res.send(JSON.stringify(msg));
     });

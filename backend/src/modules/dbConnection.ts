@@ -7,7 +7,7 @@ class DbConnection {
   constructor() {
   }
 
-  async getNews() {
+  async getNews(settings: any) {
     try {
       const res = await new Promise(
         (resolve, reject) => {
@@ -25,20 +25,31 @@ class DbConnection {
             FROM get_news('2022-08-09 19:05:06');
           `;
 
+          console.log('settngs.search: ', settings.search);
+
           const searchQuery2 = `
             SELECT *
             FROM get_news('2022-08-09 19:05:06')
-            WHERE to_tsvector(title) @@ to_tsquery('для');
+            WHERE to_tsvector(title) @@ to_tsquery('${settings.search}');
           `;
-            // WHERE Contains(text, '"*мечта*"') > 0;
+          // WHERE Contains(text, '"*мечта*"') > 0;
+
+          const mySearchQuery = (() => {
+            if (settings.search) return searchQuery2;
+
+            return searchQuery;
+          })();
+
+          this._client.query(mySearchQuery, (err: { stack: any; }, res: { rows: any; }) => {
+            if (!res) res = {rows: []};
             
-          this._client.query(searchQuery2, (err: { stack: any; }, res: { rows: any; }) => {
-            if (err) reject();
-            if (!res) reject();
-
             this._client.end();
-
-            resolve(res.rows);
+            try {
+              resolve(res.rows);
+            } catch(e) {
+              console.log(e);
+              resolve([]);
+            }
           });
         }
       );

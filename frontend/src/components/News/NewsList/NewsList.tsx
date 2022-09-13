@@ -4,16 +4,27 @@ import styles from './NewsList.module.scss';
 const NewsList = (props: any) => {
   const { messagesState } = props;
 
-  return (
-    <div className={styles.newsTable}>
-      {/* <div className={styles.newsListHeading}>
+  const renderArticles = () => {
+    if (messagesState.length === 0) {
+      return (
+        <div>Ничего не найдено</div>
+      )
+    }
 
-      </div> */}
+    return (
       <ul className={styles.newsList}>
         {messagesState.map((message: any) => {
           return <ArticlePreview key={message.id} message={message} />
         })}
       </ul>
+    );
+  }
+
+  return (
+    <div className={styles.newsTable}>
+      {/* <div className={styles.newsListHeading}>
+      </div> */}
+      {renderArticles()}
     </div>
   );
 }

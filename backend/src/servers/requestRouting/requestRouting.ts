@@ -2,12 +2,12 @@ import { dbConnection } from "../../modules/dbConnection";
 
 export const requestRouting: any = {
   news: async (settings: any) => {
-    const msg = await dbConnection.getNews();
+    const msg = await dbConnection.getNews(settings);
 
     return [ 200, msg ];
   },
   article: async (settings: any) => {
-    const news: any = await dbConnection.getNews();
+    const news: any = await dbConnection.getNews({});
     
     const msg = news.find((item: any) => {
       if (item.id === settings.id) {

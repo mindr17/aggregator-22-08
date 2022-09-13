@@ -16,7 +16,7 @@ export const startRabbitMQClient = () => {
         durable: false
       });
 
-      console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+      console.log("RabbitMQ Client started", queue);
       
       channel.consume(
         queue,
