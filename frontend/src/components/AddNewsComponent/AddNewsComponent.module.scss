@@ -1,14 +1,39 @@
 .addNews {
   display: flex;
   width: 100%;
+  font-size: 2rem;
+  flex-direction: column;
 
   .addNewsForm {
     display: flex;
+    flex-direction: column;
     width: 100%;
-  }
-  .textArea {
-    font-size: 2rem;
-    width: 500px;
+    position: relative;
+
+    .block {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .textArea {
+      display: flex;
+      // width: 100%;
+      font-size: 2rem;
+    }
+
+    .addArticleBtn {
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fff;
+        color: black;
+      }
+    }
+
   }
 
 }
