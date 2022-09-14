@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { config } from '../../src/config';
 import { socketInterface } from '../../src/modules/interfaces';
 import { MySocket } from '../../src/modules/MySocket';
@@ -7,11 +7,23 @@ import SettingsPanel from '../../src/components/News/SettingsPanel/SettingsPanel
 import NewsList from '../../src/components/News/NewsList/NewsList';
 import { SWRConfig } from 'swr';
 import { useRouter } from "next/router";
+import AuthContext from '../../src/context/AuthContext';
+import { authType } from '../../../types/sharedTypes';
+import AddNewsComponent from '../../src/components/AddNewsComponent/AddNewsComponent';
 
-const fetchData = async (settings: any) => {
+const fetchData = async (fetchProps: any) => {
+  const auth: authType = {
+    // email: 'admin@gmail.com',
+    email: 'admin@gmail.com',
+    password: 'admin123',
+    userId: '631f39402d253cdec485a876',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+  };
+
   const requestBody = {
     type: 'news',
-    settings,
+    settings: fetchProps.settings,
+    auth,
   };
 
   const response = await fetch(config.fetchUrl, {
@@ -25,30 +37,14 @@ const fetchData = async (settings: any) => {
   return await response.json();
 };
 
-export async function getStaticProps() {
-  const news = await fetchData({});
-  
-  return {
-    props: {
-      news,
-      fallback: {
-        'timeSincePostSave': '0',
-      },
-    },
-  };
-};
-
 const NewsPage: NextPage = (props: any) => {
+  const auth = useContext(AuthContext);
   const initialMessagesState = props.news;
   const [messagesState, setMessagesState] = useState(initialMessagesState);
   const router = useRouter();
   const [settingsState, setSettingsState] = useState({});
   // console.log('router.query: ', router.query);
-  
-  const updateUri = () => {
 
-  };
-  
   const update = async (settings: any) => {
     // if (JSON.stringify(settings) === JSON.stringify(settingsState)) return;
     
@@ -99,10 +95,7 @@ const NewsPage: NextPage = (props: any) => {
 
   return (
     <>
-      <SettingsPanel settingsState={settingsState} update={update}/>
-      <SWRConfig value={ props.fallback }>
-        <NewsList messagesState={messagesState} update={update}/>
-      </SWRConfig>
+      <AddNewsComponent />
     </>
   );
 }

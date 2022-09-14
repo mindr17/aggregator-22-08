@@ -6,10 +6,6 @@ import AuthContext from '../../../context/AuthContext';
 import { useRouter } from 'next/router';
 import { config } from '../../../config';
 
-// interface IProps {
-//     handleShowLogin: () => void,
-// }
-
 const LoginForm = ({ handleShowLogin }) => {
   const { load, error, request, clearError } = useHttp();
   const message = useMessage();
@@ -17,8 +13,8 @@ const LoginForm = ({ handleShowLogin }) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: 'admin@gmail.com',
+    password: 'admin123',
   });
 
   useEffect(() => {

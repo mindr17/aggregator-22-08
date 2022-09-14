@@ -7,7 +7,7 @@ const NewsList = (props: any) => {
   const renderArticles = () => {
     if (messagesState.length === 0) {
       return (
-        <div>Ничего не найдено</div>
+        <div className={styles.empty}>Ничего не найдено</div>
       )
     }
 

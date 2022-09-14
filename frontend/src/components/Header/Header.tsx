@@ -41,19 +41,21 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <a className={styles.burgerBtn} onClick={onBurgerMenuToggle}>
-          <div className={styles.burgerMenu}>
-            <div className={styles.burgerLine}></div>
-            <div className={styles.burgerLine}></div>
-            <div className={styles.burgerLine}></div>
+        <div className={styles.leftGroup}>
+          <a className={styles.burgerBtn} onClick={onBurgerMenuToggle}>
+            <div className={styles.burgerMenu}>
+              <div className={styles.burgerLine}></div>
+              <div className={styles.burgerLine}></div>
+              <div className={styles.burgerLine}></div>
+            </div>
+          </a>
+          {addBurger()}
+          <h1 className={styles.logo} onClick={() => router.push('/')}>
+            Aggregator
+          </h1>
+          <div className={styles.desktopNav}>
+            <Navbar />
           </div>
-        </a>
-        {addBurger()}
-        <h1 className={styles.logo} onClick={() => router.push('/')}>
-          Aggregator
-        </h1>
-        <div className={styles.desktopNav}>
-          <Navbar />
         </div>
         <div className={styles.rightGroup}>
           <div className={styles.authGroup}>

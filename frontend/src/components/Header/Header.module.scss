@@ -9,52 +9,51 @@
   .container {
     margin: 0 auto;
     height: 40px;
-    padding: 0 1rem;
-    max-width: 180rem;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    position: relative;
     
-    .mobileNav {
+    .leftGroup {
       display: flex;
+      gap: 10px;
 
-      @media (min-width: 768px) {
-        display: none;
+      .logo {
+        cursor: pointer;
+        margin: 0;
+        font-size: 2.4rem;
       }
 
-    }
-
-    .desktopNav {
-      position: absolute;
-      display: none;
-      
-      @media (min-width: 768px) {
+      .mobileNav {
         display: flex;
-        width: 100%;
-        justify-content: center;
+  
+        @media (min-width: 768px) {
+          display: none;
+        }
+
       }
-
-    }
-
-    .burgerBtn {
-      display: flex;
-
-      @media (min-width: 768px) {
+  
+      .desktopNav {
         display: none;
+  
+        @media (min-width: 768px) {
+          display: flex;
+        }
+  
+      }
+  
+      .burgerBtn {
+        display: flex;
+  
+        @media (min-width: 768px) {
+          display: none;
+        }
+  
       }
 
-    }
-
-    .logo {
-      cursor: pointer;
-      margin: 0;
-      font-size: 2.4rem;
     }
 
     .rightGroup {
-
       display: flex;
       gap: 2.5rem;
 
@@ -85,6 +84,7 @@
             background-color: $color-bg-secondary;
             cursor: pointer;
           }
+
         }
 
       }
@@ -102,9 +102,13 @@
           height: 4rem;
           cursor: pointer;
         }
+
       }
+
     }
+
   }
+
 }
 
 .burgerMenu {
@@ -113,14 +117,12 @@
   margin-right: 10px;
   gap: 6px;
   cursor: pointer;
-
-  .burgerLine {
-    height: 2px;
-    margin-bottom: 6px;
-    background: white;
-    transition: all .4s ease;
-    z-index: 7;
-  }
-  
 }
 
+.burgerLine {
+  height: 2px;
+  margin-bottom: 6px;
+  background: white;
+  transition: all .4s ease;
+  z-index: 7;
+}

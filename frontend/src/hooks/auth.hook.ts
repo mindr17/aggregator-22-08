@@ -3,36 +3,36 @@ import { useCallback, useEffect, useState } from 'react';
 const storageName = 'userData';
 
 const useAuth = () => {
-    const [token, setToken] = useState('');
-    const [userId, setUserId] = useState('');
+  const [token, setToken] = useState('');
+  const [userId, setUserId] = useState('');
 
-    const login = (jwtToken: string, id: string) => {
-        setToken(jwtToken);
-        setUserId(id);
+  const login = (jwtToken: string, id: string) => {
+    setToken(jwtToken);
+    setUserId(id);
 
-        localStorage.setItem(
-            storageName,
-            JSON.stringify({
-                userId: id,
-                token: jwtToken
-            })
-        );
-    };
+    localStorage.setItem(
+      storageName,
+      JSON.stringify({
+        userId: id,
+        token: jwtToken
+      })
+    );
+  };
 
-    const logout = (() => {
-        setToken('');
-        setUserId('');
-        localStorage.removeItem(storageName);
-    })
+  const logout = (() => {
+    setToken('');
+    setUserId('');
+    localStorage.removeItem(storageName);
+  })
 
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem(storageName) || '{}');
-        if (data && data.token) {
-            login(data.token, data.userId);
-        }
-    }, [login]);
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem(storageName) || '{}');
+    if (data && data.token) {
+      login(data.token, data.userId);
+    }
+  }, [login]);
 
-    return { login, logout, token, userId };
+  return { login, logout, token, userId };
 };
 
 export default useAuth;

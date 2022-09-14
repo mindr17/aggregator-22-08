@@ -8,10 +8,10 @@ import { dbConnection } from './modules/dbConnection';
 const main = async () => {
   process
     .on('unhandledRejection', (reason, p) => {
-      console.error(reason, 'Unhandled Rejection at Promise', p);
+      console.error(reason, 'Custom Unhandled Rejection at Promise', p);
     })
     .on('uncaughtException', err => {
-      console.error(err, 'Uncaught Exception thrown');
+      console.error(err, 'Custom Uncaught Exception thrown');
       // process.exit(1);
     });
 

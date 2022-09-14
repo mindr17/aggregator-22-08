@@ -9,8 +9,8 @@ function SignupForm({ handleShowLogin }) {
   const message = useMessage();
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({
-    email: 'default@test.com',
-    password: '123456Aa',
+    email: 'admin@gmail.com',
+    password: 'admin123',
   });
 
   useEffect(() => {

@@ -5,9 +5,10 @@ import AuthContext from '../../../context/AuthContext';
 import { useContext } from 'react';
 
 const navigation = [
-  { id: 1, title: 'Home', path: '/', needAuth: false, },
-  { id: 2, title: 'News', path: '/news', needAuth: false, },
-  { id: 3, title: 'Backtesting', path: '/backtesting', needAuth: true, },
+  { id: 1, title: 'Home', path: '/', },
+  { id: 2, title: 'News', path: '/news', },
+  { id: 3, title: 'Add news', path: '/addnews', needAuth: true, needAdmin: true,},
+  // { id: 4, title: 'Backtesting', path: '/backtesting', needAuth: true, },
 ];
 
 const Navbar: React.FC = () => {
@@ -17,7 +18,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.nav}>
       {/* <ul className={styles.navList}> */}
-        {navigation.filter((item: { needAuth: any; }) => {
+        {navigation.filter((item: any) => {
           if (!auth.token && item.needAuth) return false;
 
           return true;

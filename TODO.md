@@ -6,3 +6,8 @@
 
 test5@mail.com
 123456Aa
+
+email: admin@gmail.com
+password: admin123
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+iserId: 631f39402d253cdec485a876
