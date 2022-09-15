@@ -15,21 +15,26 @@ export const startHttpServer = (): void => {
   app.use(bodyParser.json());
 
   try {
-    app.post('/', async (req: any, res: any) => {
+    app.post('/', async (req: any, res: any, auth: any) => {
       // const token = res.headers["authoriztion"];
       const postMain = async (req: any, res: any, ) => {
         const body = req.body;
-
         const type: string = body.type;
         const operation = requestRouting[type];
 
         if (operation === undefined) {
-          res.send(JSON.stringify({msg: 'operation is not supported!'}));
+          res.send(JSON.stringify({msg: 'This request type is not supported!'}));
           throw new Error('This request type is not supported!');
         }
 
-        const [ statusCode, msg ]: [number, string] = await operation(body.settings);
-        console.log('msg.length: ', msg.length);
+        const props = { 
+          req,
+          res,
+          next: () => {},
+          auth,
+        };
+        const [ statusCode, msg ]: [number, string] = await operation(props);
+        // console.log('msg to frontend length: ', msg.length);
         
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.send(JSON.stringify(msg));

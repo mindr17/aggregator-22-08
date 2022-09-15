@@ -37,7 +37,7 @@ const main = async () => {
           console.log(" [x] Sent %s", testRabbitMQMsgString);
 
           mySendToQueue();
-        }, 1000);
+        }, 10000);
       };
 
       mySendToQueue();

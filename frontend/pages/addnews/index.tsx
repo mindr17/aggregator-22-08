@@ -25,7 +25,7 @@ const fetchData = async (fetchProps: any) => {
     body: JSON.stringify(requestBody),
   });
 
-  return await response.json();
+  // return await response.json();
 };
 
 const NewsPage: NextPage = (props: any) => {

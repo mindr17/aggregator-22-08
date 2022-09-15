@@ -1,5 +1,6 @@
 import { myEmitter } from '../modules/myEmitter';
-var amqp = require('amqplib/callback_api');
+// var amqp = require('amqplib/callback_api');
+import amqp from 'amqplib/callback_api';
 
 export const startRabbitMQClient = () => {
   amqp.connect('amqp://localhost', function(error0: any, connection: any) {
@@ -16,13 +17,11 @@ export const startRabbitMQClient = () => {
         durable: false
       });
 
-      console.log("RabbitMQ Client started", queue);
+      console.log("RabbitMQ Client started listening queue", queue);
       
       channel.consume(
         queue,
         function(msg: any) {
-          // console.log(" [x] Received %s", msg.content.toString());
-
           myEmitter.emit('news', msg.content.toString());
         },
         {

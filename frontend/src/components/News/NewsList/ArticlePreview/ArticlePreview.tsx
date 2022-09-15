@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 import styles from './ArticlePreview.module.scss';
 
@@ -8,12 +9,9 @@ const ArticlePreview = (props: any) => {
   const currentUnix = currentDate.getTime();
   const messageDateUnix = new Date(message.date).getTime();
   const displayDateUnix = currentUnix - messageDateUnix;
-  // const displayDate = new Date(displayDateUnix);
-  const displayDate = new Date();
+  const displayDate = new Date(displayDateUnix);
 
   const renderDate = () => {
-    // return message.date;
-
     if (displayDateUnix > 60 * 1000) {
       return (
         <div className={styles.date}>
