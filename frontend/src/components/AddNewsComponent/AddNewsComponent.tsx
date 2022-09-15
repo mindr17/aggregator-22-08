@@ -2,47 +2,40 @@ import { useState } from 'react';
 import styles from './AddNewsComponent.module.scss';
 
 const AddNewsComponent = (props: any) => {
-  const [timeState, setTimeState] = useState('');
-  const [titleState, setTitleState] = useState('');
-  const [textState, setTextState] = useState('');
-  const [form, setForm] = useState({
-    
+  const [formState, setFormState] = useState({
+    time: new Date().toString(),
+    title: 'Title of manually added news',
+    text: 'Some manually added news text',
   });
-
-  const handleSearchChange = (e: { target: { value: any; }; }) => {
-    setTimeState(e.target.value);
-  };
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     
-    const article = {
-      time: timeState,
-      title: titleState,
-      text: textState,
-    }
+    const fetchProps = {
+      type: 'addnews',
+      article: formState,
+    };
 
-    console.log(article);
-
-    // props.update({
-    //   article,
-    // });
+    console.log('fetchProps: ', fetchProps);
+    
+    props.update(fetchProps);
   };
 
-  const changeHandler = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleFieldChange = (e: { target: { name: any; value: any; }; }) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
   return (
     <div className={styles.addNews}>
-      <form className={styles.addNewsForm} onSubmit={handleSubmit}>
+      <form className={styles.addNewsForm}>
         <div className={styles.block}>
           Time
           <textarea
             className={styles.textArea}
+            name='time'
             placeholder="Input news time"
-            onChange={handleSearchChange}
-            value={timeState}
+            onChange={handleFieldChange}
+            value={formState.time}
           >
           </textarea>
         </div>
@@ -50,9 +43,10 @@ const AddNewsComponent = (props: any) => {
           Title
           <textarea
             className={styles.textArea}
+            name='title'
             placeholder="Input news title"
-            onChange={handleSearchChange}
-            value={titleState}
+            onChange={handleFieldChange}
+            value={formState.title}
           >
           </textarea>
         </div>
@@ -60,13 +54,19 @@ const AddNewsComponent = (props: any) => {
           Text
           <textarea
             className={styles.textArea}
+            name='text'
             placeholder="Input news text"
-            onChange={handleSearchChange}
-            value={textState}
+            value={formState.text}
+            onChange={handleFieldChange}
           >
           </textarea>
         </div>
-        <button className={styles.addArticleBtn}>Add article</button>
+        <button 
+          className={styles.addArticleBtn}
+          onClick={handleSubmit}
+        >
+          Add article to database
+        </button>
       </form>
     </div>
   );

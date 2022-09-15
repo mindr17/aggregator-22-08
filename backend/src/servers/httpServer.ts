@@ -2,8 +2,6 @@ import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { dbConnection } from '../modules/dbConnection';
-import { fetchHandler } from '../modules/requestHandlers/requestHandlers';
 import { requestRouting } from './requestRouting/requestRouting';
 import { authMiddleware } from '../modules/authMiddleware/authMiddleware';
 
@@ -24,20 +22,18 @@ export const startHttpServer = (): void => {
 
         const type: string = body.type;
         const operation = requestRouting[type];
-        
+
         if (operation === undefined) {
           res.send(JSON.stringify({msg: 'operation is not supported!'}));
           throw new Error('This request type is not supported!');
         }
-        
+
         const [ statusCode, msg ]: [number, string] = await operation(body.settings);
         console.log('msg.length: ', msg.length);
         
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.send(JSON.stringify(msg));
       };
-
-      // postMain();
 
       authMiddleware(req, res, postMain);
     });

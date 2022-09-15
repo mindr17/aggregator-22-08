@@ -51,19 +51,11 @@ const NewsPage: NextPage = (props: any) => {
   const [messagesState, setMessagesState] = useState(initialMessagesState);
   const router = useRouter();
   const [settingsState, setSettingsState] = useState({});
-  // console.log('router.query: ', router.query);
-  
-  const updateUri = () => {
 
-  };
-  
   const update = async (settings: any) => {
-    // if (JSON.stringify(settings) === JSON.stringify(settingsState)) return;
-    
     setSettingsState(settings);
     
     router.push({
-      // pathname: '/post/[pid]',
       query: settings,
     });
     
@@ -74,9 +66,7 @@ const NewsPage: NextPage = (props: any) => {
   useEffect(()=>{
     if(!router.isReady) return;
 
-    console.log('router.query: ', router.query);
     setSettingsState(router.query);
-    console.log('settingsState: ', settingsState);
     
     fetchData(router.query).then((news) => {
       setMessagesState(news);
@@ -90,7 +80,6 @@ const NewsPage: NextPage = (props: any) => {
     const handleNewsEvent = (event: any) => {
       setMessagesState((lastState: any) => {
         const msg = event.detail.msg;
-        msg.uid = Math.random() * 100000;
 
         return [msg, ...lastState];
       });

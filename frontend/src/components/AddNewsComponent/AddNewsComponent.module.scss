@@ -9,12 +9,12 @@
     flex-direction: column;
     width: 100%;
     position: relative;
+    gap: 10px;
 
     .block {
       display: flex;
       flex-direction: column;
       width: 100%;
-      gap: 10px;
     }
 
     .textArea {
@@ -24,7 +24,11 @@
     }
 
     .addArticleBtn {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
       color: white;
+      border-radius: 6px;
       font-size: 2rem;
       cursor: pointer;
 
