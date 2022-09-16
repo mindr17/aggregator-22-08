@@ -160,10 +160,10 @@ class DbConnection {
             this._client.connect();
             
             const merge = `
-                INSERT INTO news
-                (date, vendor, ticker, url, title, text)
-                VALUES
-                (TIMESTAMP '2022-09-16 19:05:06', 'manual', 'TEST', 'link', '${title}', '${text}');
+              INSERT INTO news
+              (date, vendor, ticker, url, title, text)
+              VALUES
+              (TIMESTAMP '2022-09-16 19:05:06', 'manual', 'TEST', 'link', '${title}', '${text}');
             `;
             
             // const mySearchQuery = (() => {
@@ -197,6 +197,52 @@ class DbConnection {
       return res;
     } catch(e) {console.error(e)};
   }
+
+  async deleteOldNews(date: any) {
+    try {    
+      const res = await new Promise(
+        (resolve, reject) => {
+          try {
+            this._client = new Client({
+              user: "postgres",
+              database: "aggregator",
+              password: "postgres",
+              host: "localhost",
+            });
+
+            this._client.connect();
+            
+            const merge = `
+              DELETE FROM news
+              WHERE date < '${date}';
+            `;
+  
+            this._client.query(merge, (err: any, res: any) => {
+              if (err) {
+                console.error(err.stack);
+              } else if (res[0].rowCount) {
+                console.info(`Added ${res[0].rowCount} new rows.`);
+              }
+
+              if (!res) res = {rows: []};
+              
+              this._client.end();
+              try {
+                resolve(res.rows);
+              } catch(e) {
+                console.log(e);
+                resolve([]);
+              }
+            });
+          } catch (e) {console.error(e)}
+        }
+      );
+
+      return res;
+    } catch(e) {console.error(e)};
+  }
+
+
 }
 
 export const dbConnection = new DbConnection();
