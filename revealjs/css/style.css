@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Arial;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Arial'),
+    url('../assets/fonts/sourcesanspro.woff') format('woff');
+}
+
+.slide {
+  
+}
+
+.startScreen {
+  /* font-family: Roboto, Arial, sans-serif; */
+  /* font-family: "Source Sans Pro", Arial, sans-serif; */
+  font-weight: 700;
+  font-size: 168px;
+  color: #F7A344;
+}
+
+.heading {
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+}
+
+.myyellow {
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: #F7A344;
+}
+
+.mark {
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  color: #F7A344;
+  position: fixed;
+}
+
+.imgBig {
+  max-height: 500px;
+}

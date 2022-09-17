@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const fetchData = async (settings: any) => {
   const auth = {
     email: 'admin@gmail.com',
-    password: 'admin1234',
+    password: 'admin123',
     userId: '631f39402d253cdec485a876',
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
   };

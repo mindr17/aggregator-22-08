@@ -4,6 +4,7 @@
 Подключиться `sudo -u postgres psql aggregator`  
 Список баз данных `\l`  
 Список таблиц `\dt`  
+Выход `\q`
 Инструкция по созданию таблиц в db/ReadMe.txt 
 ### Install RabbitMQ
 https://www.rabbitmq.com/install-debian.html#apt-quick-start-cloudsmith

@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		
+		<link rel="stylesheet" href="./css/style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section data-background-color="black">
+					<div class="startScreen">Financial aggregator</div>
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Idea</div>
+					<!-- <div class="mark">Financial aggregator</div> -->
+					<img class="stretch" src="/assets/img/idea.jpg">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Proof of Concept</div>
+					<img class="stretch" src="/assets/img/poc.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Reference: scanz.com</div>
+					<img class="stretch" src="/assets/img/scanz.gif">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Mockup</div>
+					<img class="stretch" src="/assets/img/mockup.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Design</div>
+					<img class="stretch" src="/assets/img/design.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Initial architecture</div>
+					<img class="stretch" src="/assets/img/architecture1.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Architecture version 2</div>
+					<img class="stretch" src="/assets/img/architecture2.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Kanban board</div>
+					<img class="stretch" src="/assets/img/trello.png">
+				</section>
+				
+				<section class="slide" data-background-color="black">
+					<div class="heading">Postgres: news and prices</div>
+					<img class="stretch" src="/assets/img/postgres.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Mongo: authentication</div>
+					<img class="stretch" src="/assets/img/mongo.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Microservices</div>
+					<img class="stretch" src="/assets/img/pm2.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Query params: from address bar and from search box</div>
+					<img class="stretch" src="/assets/img/queryparams.png">
+				</section>
+
+				<section class="slide" data-background-color="black">
+					<div class="heading">Static Site Generation: performance on mobile devices</div>
+					<img class="stretch" src="/assets/img/ssg.png">
+				</section>
+
+
+
+
+
+
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1 class="r-fit-text">Proof of Concept</h1>
+				</section>
+				
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Turn this:</h1>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #03440C, #2A9D8F)">
+					<h1>Into this:</h1>
+					<img src="/assets/to.png">
+				</section>
+				
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Without pm2:</h1>
+					<img src="/assets/without.png">
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #03440C, #2A9D8F)">
+					<h1>With pm2:</h1>
+					<img src="/assets/dota.png">
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Requirements:</h1>
+					<img src="/assets/nodejs.svg">
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Installation:</h1>
+					<pre><code class='bash'>
+	npm install pm2 -g
+					</code></pre>
+					<pre><code class='bash'>
+	pm2 -v
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Basic usage:</h1>
+					<pre><code class='bash'>
+	pm2 start index.js
+					</code></pre>
+					<pre><code class='bash'>
+	pm2 delete all
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Interface:</h1>
+					<img style="background: rgba(0,0,0,1);" src="/assets/interface.png">
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Access interface:</h1>
+					<pre><code class='bash'>
+	pm2 list
+					</code></pre>
+					or
+					<pre><code class='bash'>
+	pm2 l
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Restart:</h1>
+					<pre><code class='bash'>
+	pm2 restart all
+					</code></pre>
+					or hot reload without stopping
+					<pre><code class='bash'>
+	pm2 reload all
+					</code></pre>
+				</section>
+				
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>More:</h1>
+					<pre><code class='bash'>
+	pm2 stop all
+					</code></pre>
+					<pre><code class='bash'>
+	pm2 delete all
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Single process:</h1>
+					<pre><code class='bash'>
+	pm2 stop "process-id"
+					</code></pre>
+					Example:
+					<pre><code class='bash'>
+	pm2 stop 0
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Handle OS restarts:</h1>
+					<pre><code class='bash'>
+	pm2 save
+					</code></pre>
+					Manual, optionally:
+					<pre><code class='bash'>
+	pm2 resurrect
+					</code></pre>
+					<pre><code class='bash'>
+	pm2 startup
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Check logs:</h1>
+					<pre><code class='bash'>
+	pm2 log
+					</code></pre>
+					<img src="/assets/log.png">
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h1>Extend:</h1>
+					<pre><code class='bash'>
+	pm2 install "module-name"
+					</code></pre>
+					<pre><code class='bash'>
+	pm2 uninstall "module-name"
+					</code></pre>
+					Example:
+					<pre><code class='bash'>
+	pm2 install pm2-mongodb
+					</code></pre>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #03440C, #2A9D8F)">
+					<h2>Pros</h2>
+					<ol>
+						<li>Easy to install</li>
+						<li>Easy to use</li>
+						<li>Big community</li>
+						<li>Active support and development</li>
+						<li>Supports python and other scripts</li>
+					</ol>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #9E2A2B)">
+					<h2>Cons</h2>
+					<ol>
+						<li>Need nodejs installed</li>
+						<li>Doesn't support all possible types of scripts</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section data-background-gradient="linear-gradient(to bottom, #540B0E, #540B0E)">
+					<h1 class="r-fit-text">Thanks for attention!</h1>
+					<img src="/assets/pm2-list.png" alt="Down arrow">
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: 1920,
+				height: 1080,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
