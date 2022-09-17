@@ -24,31 +24,30 @@ class DbConnection {
             
             const searchQuery = `
               SELECT *
-              FROM get_news('2022-08-09 19:05:06')
-              ORDER BY date DESC
+              FROM get_news('2022-08-08 19:05:06')
               LIMIT 50;
             `;
             
             const searchQuery2 = `
               SELECT *
-              FROM get_news('2022-08-09 19:05:06')
+              FROM get_news('2022-08-08 19:05:06')
               WHERE to_tsvector(title) @@ to_tsquery('${settings?.search}')
-              ORDER BY date DESC
               LIMIT 50;
             `;
-            
+
             const mySearchQuery = (() => {
               if (!settings) return searchQuery;
               if (!settings.search) return searchQuery;
-              
+
               return searchQuery2;
             })();
-  
+
             this._client.query(mySearchQuery, (err: { stack: any; }, res: { rows: any; }) => {
               if (!res) res = {rows: []};
-              
+
               this._client.end();
               try {
+                console.log('res.rows: ', res.rows);
                 resolve(res.rows);
               } catch(e) {
                 console.log(e);
@@ -202,39 +201,39 @@ class DbConnection {
     try {    
       const res = await new Promise(
         (resolve, reject) => {
-          try {
-            this._client = new Client({
-              user: "postgres",
-              database: "aggregator",
-              password: "postgres",
-              host: "localhost",
-            });
+          // try {
+          //   this._client = new Client({
+          //     user: "postgres",
+          //     database: "aggregator",
+          //     password: "postgres",
+          //     host: "localhost",
+          //   });
 
-            this._client.connect();
+          //   this._client.connect();
             
-            const merge = `
-              DELETE FROM news
-              WHERE date < '${date}';
-            `;
+          //   const merge = `
+          //     DELETE FROM news
+          //     WHERE date < '${date}';
+          //   `;
   
-            this._client.query(merge, (err: any, res: any) => {
-              if (err) {
-                console.error(err.stack);
-              } else if (res[0].rowCount) {
-                console.info(`Added ${res[0].rowCount} new rows.`);
-              }
+          //   this._client.query(merge, (err: any, res: any) => {
+          //     if (err) {
+          //       console.error(err.stack);
+          //     } else if (res[0].rowCount) {
+          //       console.info(`Added ${res[0].rowCount} new rows.`);
+          //     }
 
-              if (!res) res = {rows: []};
+          //     if (!res) res = {rows: []};
               
-              this._client.end();
-              try {
-                resolve(res.rows);
-              } catch(e) {
-                console.log(e);
-                resolve([]);
-              }
-            });
-          } catch (e) {console.error(e)}
+          //     this._client.end();
+          //     try {
+          //       resolve(res.rows);
+          //     } catch(e) {
+          //       console.log(e);
+          //       resolve([]);
+          //     }
+          //   });
+          // } catch (e) {console.error(e)}
         }
       );
 

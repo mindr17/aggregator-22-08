@@ -2,7 +2,7 @@ import { startWsServer } from './servers/WSServer';
 import { startHttpServer } from './servers/httpServer';
 import { startAuthServer } from './auth/app';
 import { startRabbitMQClient } from './modules/startRabbitMQClient';
-import { dbCleaner } from './modules/dbCleaner';
+// import { dbCleaner } from './modules/dbCleaner';
 // import { myEmitter } from './modules/myEmitter';
 
 const main = async () => {
@@ -19,7 +19,7 @@ const main = async () => {
   startHttpServer();
   startWsServer();
   startRabbitMQClient();
-  dbCleaner();
+  // dbCleaner();
   
   // const sendToFront = async () => {
   //   const news = await dbConnection.getNews();

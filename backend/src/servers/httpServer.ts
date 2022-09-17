@@ -15,7 +15,7 @@ export const startHttpServer = (): void => {
   app.use(bodyParser.json());
 
   try {
-    app.post('/', async (req: any, res: any, auth: any) => {
+    app.post('/', async (req: any, res: any) => {
       // const token = res.headers["authoriztion"];
       const postMain = async (req: any, res: any, ) => {
         const body = req.body;
@@ -26,19 +26,20 @@ export const startHttpServer = (): void => {
           res.send(JSON.stringify({msg: 'This request type is not supported!'}));
           throw new Error('This request type is not supported!');
         }
-
+        
         const props = { 
           req,
           res,
           next: () => {},
-          auth,
+          auth: 'no',
         };
         const [ statusCode, msg ]: [number, string] = await operation(props);
-        // console.log('msg to frontend length: ', msg.length);
+        console.log('msg to frontend length: ', msg.length);
         
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.send(JSON.stringify(msg));
       };
+      // postMain(req, res);
 
       authMiddleware(req, res, postMain);
     });
